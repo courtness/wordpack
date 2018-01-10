@@ -26,8 +26,8 @@ import { isDefined, isEmpty } from "./utils/helpers";
     require("./components/Footer");
 
     // only ever one template-root at a time? 🐕
-    if ($("#template-root").length && !isEmpty($("#template-root").data("controller")) {
-      require("./components/" + $("#template-root").data("controller"));
+    if ($("#template-root").length && !isEmpty($("#template-root").data("component"))) {
+      require("./components/" + $("#template-root").data("component"));
     }
   });
 })(jQuery);
