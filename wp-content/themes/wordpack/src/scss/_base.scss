@@ -1,0 +1,49 @@
+////////////
+
+html {
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+strong,
+.strong {
+  font-weight: bold;
+}
+
+em,
+.em {
+  font-style: italic;
+}
+
+button {
+  outline: none;
+}
+
+textarea:focus,
+input:focus{
+  outline: none;
+}
+
+
+////////////
+
+// layout
+
+.wrap {}
+
+////////////
+
+// helpers
+
+.hide-overflow {
+  overflow: hidden !important;
+}
+
+.gpu {
+  transform: translate3d(0,0,0);
+  backface-visibility: hidden;
+  perspective: 1000;
+}

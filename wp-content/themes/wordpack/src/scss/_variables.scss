@@ -1,0 +1,44 @@
+////////////
+
+// color hexes
+
+// ...
+
+////////////
+
+// devices
+
+$mobile-width : 768px;
+$tablet-width : 1024px;
+
+@mixin mobile {
+  @media screen and (max-width: $mobile-width - 1) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media screen and (min-width: $mobile-width) and (max-width: $tablet-width) {
+    @content;
+  }
+}
+
+@mixin tablet-and-mobile {
+  @media screen and (max-width: $tablet-width) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media screen and (min-width: $tablet-width + 1) {
+    @content;
+  }
+}
+
+@mixin high-dpi {
+  @media
+  (-webkit-min-device-pixel-ratio: 1.5),
+  (min-resolution: 144dpi) {
+    @content;
+  }
+}
