@@ -6,7 +6,7 @@ require("../scss/index.scss");
 //
 // app imports
 
-import { isDefined } from "./utils/helpers";
+import { isDefined, isEmpty } from "./utils/helpers";
 
 //
 // executor
@@ -25,8 +25,9 @@ import { isDefined } from "./utils/helpers";
     require("./components/Header");
     require("./components/Footer");
 
-    if ($("#template-id").length) {
-      require("./components/" + $("#template-id").data("controller"));
+    // only ever one template-root at a time? 🐕
+    if ($("#template-root").length && !isEmpty($("#template-root").data("controller")) {
+      require("./components/" + $("#template-root").data("controller"));
     }
   });
 })(jQuery);
