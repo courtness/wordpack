@@ -14,6 +14,12 @@ module.exports = {
     filename: "[name].js"
   },
 
+  resolve: {
+    alias: {
+      "assets": path.resolve(__dirname, "assets")
+    }
+  },
+
   plugins: [
     // js
     new webpack.optimize.UglifyJsPlugin({
