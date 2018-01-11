@@ -72,15 +72,20 @@ module.exports = {
         })
       },
 
+      // images
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: [
+          "file-loader"
+        ]
+      },
+
       // fonts
       {
-        test: /\.(eot|svg|ttf|woff|woff2)$/,
-        use: {
-          loader: "file-loader",
-          query: {
-            name: "../../fonts/[name].[ext]"
-          }
-        }
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        use: [
+          "url-loader",
+        ]
       }
     ]
   },
