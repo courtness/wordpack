@@ -2,7 +2,8 @@
 export default class Resizable {
   constructor() {
     this.state = {
-      windowWidth: $(window).width()
+      windowWidth: document.documentElement.clientWidth,
+      windowHeight: document.documentElement.clientHeight,
     };
   }
 
@@ -11,11 +12,16 @@ export default class Resizable {
   }
 
   onResize = () => {
-    this.state.windowWidth = $(window).width()
-    console.log(this.state.windowWidth);
+    this.state.windowWidth = document.documentElement.clientWidth
+    this.state.windowHeight = document.documentElement.clientHeight
+    console.log(`height: ${this.state.windowHeight}, width: ${this.state.windowWidth}`);
   }
 
-  registerHandler = () => {
-    window.onresize = this.onResize;
+  registerResizeHandler = () => {
+    window.addEventListener("resize", this.onResize, true);
+  }
+
+  unregisterResizeHandler = () => {
+    window.removeEventListener("resize", this.onResize, true);
   }
 }

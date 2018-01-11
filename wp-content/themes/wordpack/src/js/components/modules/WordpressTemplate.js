@@ -4,7 +4,7 @@ export default class WordpressTemplate extends Resizable {
   constructor() {
     super();
 
-    this.registerHandler();
+    this.registerResizeHandler();
 
     this.doSomethingResizable();
   }
