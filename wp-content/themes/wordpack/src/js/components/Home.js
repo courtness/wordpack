@@ -6,8 +6,11 @@ export default class Home extends WordpressTemplate {
 
     console.log(this.state);
 
-    this.doSomethingWordpress();
-    this.doSomethingResizable();
+    window.addEventListener("resize", this.debugState, true);
+  }
+
+  debugState = () => {
+    console.log(this.state);
   }
 }
 

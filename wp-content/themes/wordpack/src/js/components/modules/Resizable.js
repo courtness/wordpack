@@ -7,14 +7,9 @@ export default class Resizable {
     };
   }
 
-  doSomethingResizable = () => {
-    console.log("doing a resize thing");
-  }
-
   onResize = () => {
     this.state.windowWidth = document.documentElement.clientWidth
     this.state.windowHeight = document.documentElement.clientHeight
-    console.log(`height: ${this.state.windowHeight}, width: ${this.state.windowWidth}`);
   }
 
   registerResizeHandler = () => {
