@@ -1,10 +1,15 @@
+import Resizable from "./Resizable";
 
-export default class WordpressTemplate {
+export default class WordpressTemplate extends Resizable {
   constructor() {
-    console.log("created wp template");
+    super();
+
+    this.registerHandler();
+
+    this.doSomethingResizable();
   }
 
-  something() {
-    console.log("wp template something");
+  doSomethingWordpress = () => {
+    console.log("doing a wordpress thing");
   }
 }
