@@ -70,6 +70,17 @@ module.exports = {
             }
           ]
         })
+      },
+
+      // fonts
+      {
+        test: /\.(eot|svg|ttf|woff|woff2)$/,
+        use: {
+          loader: "file-loader",
+          query: {
+            name: "../../fonts/[name].[ext]"
+          }
+        }
       }
     ]
   },
