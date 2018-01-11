@@ -74,18 +74,18 @@ module.exports = {
 
       // images
       {
-        test: /\.(png|svg|jpg|gif)$/,
-        use: [
-          "file-loader"
-        ]
+        test: /\.(jpg|jpeg|gif|png|svg)$/,
+        use: {
+          loader: "url-loader"
+        }
       },
 
       // fonts
       {
-        test: /\.(woff|woff2|eot|ttf|otf)$/,
-        use: [
-          "url-loader"
-        ]
+        test: /\.(ttf|eot|woff|woff2)$/,
+        use: {
+          loader: "url-loader"
+        }
       }
     ]
   },
