@@ -7,11 +7,8 @@ require("../scss/index.scss");
   window.$ = jQuery;
 
   $(document).ready(function() {
-    require("./components/Header");
-    require("./components/Footer");
-
-    if ($("#template-root").length && !isEmpty($("#template-root").data("component"))) {
-      require("./components/" + $("#template-root").data("component"));
-    }
+    $("[data-component]").each((i, elem) => {
+      require("./components/" + $(elem).data("component"));
+    });
   });
 })(window);

@@ -33,4 +33,4 @@
   </head>
   <body <?php body_class() ?>>
     <div class="wrap">
-      <header class="wordpack-header"></header>
+      <header class="wordpack-header" data-component="Header"></header>
