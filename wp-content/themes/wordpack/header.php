@@ -21,6 +21,12 @@
 
     <title><?php wp_title( '' ) ?></title>
 
+    <?php if ( ENVIRONMENT == 'development' ): ?>
+      <link rel="stylesheet" href="<?php wordpack_include( 'dist/css/app.css', true ) ?>" type="text/css" media="screen">
+    <?php else: ?>
+      <link rel="stylesheet" href="<?php wordpack_include( 'dist/css/app.min.css', true ) ?>" type="text/css" media="screen">
+    <?php endif ?>
+
     <?php wp_head() ?>
 
     <link rel="shortcut icon" sizes="16x16 32x32" href="<?php echo site_url() ?>/favicon.ico">
