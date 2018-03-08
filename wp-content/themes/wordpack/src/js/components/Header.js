@@ -1,16 +1,17 @@
-import Resizable from "./modules/Resizable";
 
 export default class Header extends Resizable {
   constructor() {
     super();
 
-    console.log("Header.state: ", this.state);
+    Object.assign(this.state, {
+      $header : $(".wordpack-header"),
+    });
 
-    window.addEventListener("resize", this.debugState, true);
+    this.addHeaderListeners();
   }
 
-  debugState = () => {
-    console.log("Header.state: ", this.state);
+  addHeaderListeners = () => {
+    // ...
   }
 }
 

@@ -1,16 +1,42 @@
 import WordpressTemplate from "./modules/WordpressTemplate";
+import { eventService } from "./../services/EventService";
+import { imageService } from "./../services/ImageService";
+import { VideoService } from "./../services/VideoService";
+import { wordpressAdminService } from "./../services/WordpressAdminService";
 
 export default class Home extends WordpressTemplate {
   constructor() {
     super();
 
-    console.log("Home.state: ", this.state);
+    this.wordpressTemplateProxy.htmlBackgroundColor = data.colors.black;
 
-    window.addEventListener("resize", this.debugState, true);
+    this.initialise();
   }
 
-  debugState = () => {
-    console.log("Home.state: ", this.state);
+  initialise = () => {
+    console.log("home");
+
+    eventService.on("device", (device) => {
+      console.log("Device changed: ", device);
+    });
+
+    imageService.setImageCache($(`.image-class[data-src]:not([data-src=""])`));
+
+    videoService.setVideos($(".video-class"));
+
+    wordpressAdminService.getFromAction("admin_get_function").then((response) => {
+      console.log("Admin: ", response);
+    }, (error) => {
+      console.error("Error: ", error);
+      throw error;
+    });
+
+    wordpressAdminService.postToAction("admin_post_function", { data : data }).then((response) => {
+      console.log("Admin: ", response);
+    }, (error) => {
+      console.error("Error: ", error);
+      throw error;
+    });
   }
 }
 

@@ -4,16 +4,29 @@ export default class WordpressTemplate extends Resizable {
   constructor() {
     super();
 
-    this.state = {
-      htmlBackgroundColor: "white",
-      templateClasses: $("#template-root").attr("class")
-    }
+    Object.assign(this.state, {
+      $html : $("html"),
+      htmlBackgroundColor: "white"
+    });
 
-    this.registerResizeHandler();
-  }
+    this.wordpressTemplateProxy = new Proxy(this.state, {
+      set(target, key, value) {
+        target[key] = value;
 
-  setHtmlBackgroundColor = (hex) => {
-    this.state.htmlBackgroundColor = hex;
-    $("html").css("background-color", hex);
+        switch(key) {
+          case "htmlBackgroundColor":
+            $html.css("background-color", value);
+            break;
+
+          default:
+            break;
+        }
+
+        return true;
+      }
+    });
+
+    this.defaultResizeHandler();
+    this.addDefaultResizeHandler();
   }
 }

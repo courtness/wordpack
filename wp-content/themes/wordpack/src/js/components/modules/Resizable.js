@@ -1,22 +1,39 @@
+import { eventService } from "./../../services/EventService";
+import { isMobile, isTablet, isDesktop } from "./../../utils/screen";
 
 export default class Resizable {
   constructor() {
     this.state = {
+      device: "desktop",
       windowWidth: document.documentElement.clientWidth,
-      windowHeight: document.documentElement.clientHeight,
+      windowHeight: document.documentElement.clientHeight
     };
   }
 
-  onResize = () => {
-    this.state.windowWidth = document.documentElement.clientWidth
-    this.state.windowHeight = document.documentElement.clientHeight
+  defaultResizeHandler = () => {
+    this.state.windowWidth = document.documentElement.clientWidth;
+    this.state.windowHeight = document.documentElement.clientHeight;
+
+    let oldDevice = this.state.device;
+
+    if (isMobile()) {
+      this.state.device = "mobile";
+    } else if (isTablet()) {
+      this.state.device = "tablet";
+    } else {
+      this.state.device = "desktop";
+    }
+
+    if (oldDevice !== this.state.device) {
+      eventService.emitDeviceChange(this.state.device);
+    }
   }
 
-  registerResizeHandler = () => {
-    window.addEventListener("resize", this.onResize, true);
+  addDefaultResizeHandler = () => {
+    window.addEventListener("resize", this.defaultResizeHandler, true);
   }
 
-  unregisterResizeHandler = () => {
-    window.removeEventListener("resize", this.onResize, true);
+  removeDefaultResizeHandler = () => {
+    window.removeEventListener("resize", this.defaultResizeHandler, true);
   }
 }
