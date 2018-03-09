@@ -18,6 +18,12 @@ export default class Home extends WordpressTemplate {
 
     eventService.on("device", (device) => {
       console.log("Device changed: ", device);
+
+      if (device === "desktop") {
+        // do desktop things
+      } else {
+        // undo desktop things
+      }
     });
 
     imageService.setImageCache($(`.image-class[data-src]:not([data-src=""])`));

@@ -15,7 +15,7 @@ export default class WordpressTemplate extends Resizable {
 
         switch(key) {
           case "htmlBackgroundColor":
-            $html.css("background-color", value);
+            $html.addClass(`bg-${value}`);
             break;
 
           default:
