@@ -1,14 +1,12 @@
-import { isDefined } from "./../utils/helpers";
 
 class VideoService {
   constructor() {
-    this.state = {
-      loaded : false,
+    this._template = {
       $videos : {}
-    }
+    };
   }
 
-  setVideos = ($videos) => {
+  setVideos = ($videos, save) => {
     $videos.each((index, element) => {
       let $element = $(element);
 
@@ -21,16 +19,18 @@ class VideoService {
       };
     });
 
-    this.state.$videos = $videos;
+    if (save) {
+      this._template.$videos = $videos;
+    }
   }
 
   getVideos = () => {
-    return this.state.$videos;
+    return this._template.$videos;
   }
 
   pauseVideos = ($videos) => {
-    if (!isDefined($videos)) {
-      $videos = this.state.$videos;
+    if (!$videos) {
+      $videos = this._template.$videos;
     }
 
     for (let $video of $videos) {

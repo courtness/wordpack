@@ -1,36 +1,30 @@
-import { isDefined } from "./../utils/helpers";
 
 class ImageService {
   constructor() {
-    this.state = {
-      loaded : false,
-      $imageCache : {}
+    this._template = {
+      $imgCache : {}
     }
   }
 
-  isLoaded = () => {
-    return this.state.loaded;
-  }
-
   getImageCache = () => {
-    return this.state.$imageCache;
+    return this._template.$imgCache;
   }
 
-  setImageCache = ($images) => {
-    this.state.$imageCache = $images;
+  setImageCache = ($imgElements) => {
+    this._template.$imgCache = $imgElements;
   }
 
-  lazyLoadImageCache = (timeout) => {
-    lazyLoad(this.state.$imageCache, timeout);
-  }
-
-  lazyLoad = ($imgElements, timeout) => {
+  lazyLoad = ($imgElements, timeout, save) => {
     if (!$imgElements.length) {
       return;
     }
 
-    if (!isDefined(timeout)) {
+    if (!timeout) {
       timeout = 100;
+    }
+
+    if (save) {
+      this._template.$imgCache = $imgElements;
     }
 
     $imgElements.each((index, element) => {
