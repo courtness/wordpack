@@ -4,9 +4,10 @@ import jQuery from "jquery";
 
 (global => {
   window.$ = jQuery;
-  window.baseUrl = document.getElementById("wp-base-url");
+  window.baseURL = document.getElementById("wp-base-url").href;
 
   $(document).ready(function() {
+    $("#wp-base-url").remove();
     $("[data-component]").each((i, elem) => {
       require("./components/" + $(elem).data("component"));
     });

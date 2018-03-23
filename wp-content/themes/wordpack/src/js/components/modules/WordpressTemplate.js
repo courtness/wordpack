@@ -5,17 +5,34 @@ export default class WordpressTemplate extends Resizable {
     super();
 
     Object.assign(this.state, {
-      $html : $("html"),
-      htmlBackgroundColor: "white"
+      bodyToggleClass : "",
+      htmlToggleClass : "",
+      windowWidth  : this.state.windowWidth,
+      windowHeight : this.state.windowHeight,
+
+      template : {
+        $body : $("body"),
+        $html : $("html")
+      }
     });
 
-    this.wordpressTemplateProxy = new Proxy(this.state, {
+    this.initialise();
+  }
+
+  initialise = () => {
+    let self = this;
+
+    self.wordpressTemplateProxy = new Proxy(self.state, {
       set(target, key, value) {
         target[key] = value;
 
         switch(key) {
-          case "htmlBackgroundColor":
-            $html.addClass(`bg-${value}`);
+          case "htmlToggleClass":
+            self.state.template.$html.toggleClass(value);
+            break;
+
+          case "bodyToggleClass":
+            self.state.template.$body.toggleClass(value);
             break;
 
           default:
@@ -25,8 +42,5 @@ export default class WordpressTemplate extends Resizable {
         return true;
       }
     });
-
-    this.defaultResizeHandler();
-    this.addDefaultResizeHandler();
   }
 }

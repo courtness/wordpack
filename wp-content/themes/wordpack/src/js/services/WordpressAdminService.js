@@ -2,19 +2,45 @@ import { isEmpty } from "./../utils/helpers";
 
 class WordpressAdminService {
   constructor() {
-    this.state = {
-      wpAdminUrl : document.getElementById("wp-admin-url")
-    }
+    this._wpAdminURL = document.getElementById("wp-admin-url").href;
+    this._wpThemeURL =  document.getElementById("wp-theme-url").href;
+
+    $("#wp-admin-url, #wp-theme-url").remove();
   }
 
-  setAdminUrl = (wpAdminUrl) => {
-    this.state.wpAdminUrl = wpAdminUrl;
+  setAdminURL = (wpAdminURL) => {
+    this._wpAdminURL = wpAdminURL;
+  }
+
+  setThemeURL = (wpThemeURL) => {
+    this._wpThemeURL = wpThemeURL;
+  }
+
+  getThemeFile = (path, dataType) => {
+    if (!dataType) {
+      dataType = "json"
+    }
+
+    return new Promise((resolve, reject) => {
+      $.ajax({
+        url : `${this._wpThemeURL}/${path}`,
+        action : "get",
+        dataType : dataType,
+        encode : true,
+        success : (data) => {
+          resolve(data);
+        },
+        error : (error) => {
+          reject(error);
+        }
+      });
+    });
   }
 
   getFromAction = (action) => {
     return new Promise((resolve, reject) => {
-      if (isEmpty(this.state.wpAdminUrl)) {
-        reject("Wordpress wpAdminUrl unset. Please set this first using 'setWordpressAdminUrl'.");
+      if (isEmpty(this._wpAdminURL)) {
+        reject("Wordpress wpAdminUrl unset.");
       }
 
       if (isEmpty(action)) {
@@ -22,7 +48,7 @@ class WordpressAdminService {
       }
 
       $.ajax({
-        url : this.state.wpAdminUrl,
+        url : this._wpAdminURL,
         method : "get",
         data : {
           action : action
@@ -39,8 +65,8 @@ class WordpressAdminService {
 
   postToAction = (action, data) => {
     return new Promise((resolve, reject) => {
-      if (isEmpty(this.state.wpAdminUrl)) {
-        reject("Wordpress wpAdminUrl unset. Please set this first using 'setWordpressAdminUrl'.");
+      if (isEmpty(this._wpAdminURL)) {
+        reject("Wordpress wpAdminUrl unset.");
       }
 
       if (isEmpty(action)) {
@@ -54,7 +80,7 @@ class WordpressAdminService {
       data.action = action;
 
       $.ajax({
-        url : this.state.wpAdminUrl,
+        url : this._wpAdminURL,
         method : "post",
         data : data,
         success : (response) => {

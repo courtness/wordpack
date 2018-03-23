@@ -3,6 +3,7 @@ import { eventService } from "./../services/EventService";
 import { imageService } from "./../services/ImageService";
 import { VideoService } from "./../services/VideoService";
 import { wordpressAdminService } from "./../services/WordpressAdminService";
+import { data } from "./../config/data";
 
 export default class Home extends WordpressTemplate {
   constructor() {
