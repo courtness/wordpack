@@ -4,12 +4,11 @@ import jQuery from "jquery";
 
 (global => {
   window.$ = jQuery;
-  window.baseURL = document.getElementById("wp-base-url").href;
+  window.baseURL = $("#wp-url").data("baseurl");
 
   $(document).ready(function() {
-    $("#wp-base-url").remove();
-    $("[data-component]").each((i, elem) => {
-      require("./components/" + $(elem).data("component"));
+    $("[data-component]").each((index, element) => {
+      require("./components/" + $(element).data("component"));
     });
   });
 })(window);

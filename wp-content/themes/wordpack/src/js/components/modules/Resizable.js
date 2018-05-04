@@ -8,6 +8,8 @@ export default class Resizable {
       windowWidth: document.documentElement.clientWidth,
       windowHeight: document.documentElement.clientHeight
     };
+
+    this.addDefaultResizeHandler();
   }
 
   defaultResizeHandler = () => {
@@ -25,8 +27,13 @@ export default class Resizable {
     }
 
     if (oldDevice !== this.state.device) {
-      eventService.emitDeviceChange(this.state.device);
+      eventService.emitDataByKey("device", this.state.device);
     }
+
+    eventService.emitDataByKey("resize", {
+      width: this.state.windowWidth,
+      height: this.state.windowHeight
+    });
   }
 
   addDefaultResizeHandler = () => {

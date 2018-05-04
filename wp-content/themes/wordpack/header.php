@@ -33,9 +33,11 @@
     <?php wp_head() ?>
   </head>
   <body <?php body_class() ?>>
-    <a id="wp-base-url" class="no-display" href="<?php echo wordpack_url(); ?>"></a>
-    <a id="wp-admin-url" class="no-display" href="<?php echo esc_url( admin_url('admin-post.php') ); ?>"></a>
-    <a id="wp-theme-url" class="no-display" href="<?php echo esc_url( get_template_directory_uri() ); ?>"></a>
+    <div id="wp-url" data-baseurl="<?php echo get_site_url(); ?>"
+      data-adminurl="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>"
+      data-ajaxurl="<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>"
+      data-themeurl="<?php echo esc_url( get_template_directory_uri() ); ?>">
+    </div>
 
     <div class="wrap">
       <header class="wordpack-header" data-component="Header"></header>

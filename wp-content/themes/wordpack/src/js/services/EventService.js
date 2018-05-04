@@ -5,15 +5,9 @@ class EventService extends EventEmitter {
     super();
   }
 
-  emitDeviceChange = (device) => {
-    this.emit("device", device);
+  emitDataByKey = (key, data) => {
+    this.emit(key, data);
   }
-
-  // emitSomeAjaxEvent ...
-
-  // emitLocationFound ...
-
-  // emitCookieLoaded ...
 }
 
 export let eventService = new EventService();
