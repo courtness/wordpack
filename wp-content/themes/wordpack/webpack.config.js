@@ -5,8 +5,8 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
   entry: {
-    "app": "./src/js/index.js",
-    "app.min": "./src/js/index.js"
+    "app": ["babel-polyfill", "proxy-polyfill", "./src/js/index.js"],
+    "app.min": ["babel-polyfill", "proxy-polyfill", "./src/js/index.js"]
   },
 
   output: {
