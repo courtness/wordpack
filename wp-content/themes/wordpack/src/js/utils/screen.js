@@ -21,3 +21,13 @@ export function isTablet() {
 export function getWindowWidth() {
   return window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 }
+
+export function getDevice() {
+  if (isDesktop()) {
+    return "desktop";
+  } else if (isTablet()) {
+    return "tablet";
+  } else {
+    return "mobile";
+  }
+}

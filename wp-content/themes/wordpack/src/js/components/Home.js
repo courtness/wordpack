@@ -4,17 +4,21 @@ import { imageService } from "./../services/ImageService";
 import { videoService } from "./../services/VideoService";
 import { wordpressAdminService } from "./../services/WordpressAdminService";
 
+let HOME;
+
 export default class Home extends WordpressTemplate {
   constructor() {
     super();
 
-    this.initialise();
+    HOME = this;
+
+    HOME.initialize();
   }
 
-  initialise = () => {
+  initialize = () => {
     console.log("home");
 
-    this.wordpressTemplateProxy.htmlToggleClass = "bg-black";
+    HOME.wordpressTemplateProxy.htmlToggleClass = "bg-black";
 
     eventService.on("device", (device) => {
       console.log("Device changed: ", device);

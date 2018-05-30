@@ -1,16 +1,20 @@
 
+let FOOTER;
+
 export default class Footer extends Resizable {
   constructor() {
     super();
 
-    this._template = {
+    FOOTER = this;
+
+    FOOTER._template = {
       $footer : $(".wordpack-footer")
     };
 
-    this.addFooterListeners();
+    FOOTER.initialize();
   }
 
-  addFooterListeners = () => {
+  initialize = () => {
     // ...
   }
 }

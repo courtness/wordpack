@@ -1,17 +1,18 @@
 var webpack = require("webpack");
 var path = require("path");
 
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+const CompressionPlugin = require("compression-webpack-plugin")
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
   entry: {
-    "app": ["babel-polyfill", "proxy-polyfill", "./src/js/index.js"],
-    "app.min": ["babel-polyfill", "proxy-polyfill", "./src/js/index.js"]
+    "app": ['babel-polyfill','proxy-polyfill', './src/js/index.js'],
+    "app.min": ['babel-polyfill','proxy-polyfill', './src/js/index.js']
   },
 
   output: {
-    path: __dirname + "/dist/js",
-    filename: "[name].js"
+    path: path.resolve(__dirname, "./dist"),
+    filename: "js/[name].js"
   },
 
   resolve: {
@@ -29,8 +30,20 @@ module.exports = {
 
     // css
     new ExtractTextPlugin({
-      filename: "../css/[name].css"
+      filename: "./css/[name].css"
     }),
+
+    // gzip
+    new CompressionPlugin({
+      test: /\.js$|\.css$/,
+      threshold: 10240,
+      minRatio: 0
+    }),
+
+    // prod mode
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': '"production"'
+    })
   ],
 
   module: {
@@ -82,7 +95,12 @@ module.exports = {
       {
         test: /\.(jpg|jpeg|gif|png|svg)$/,
         use: {
-          loader: "url-loader"
+          loader: "file-loader",
+          options: {
+            useRelativePath: true,
+            name: "[name].[ext]",
+            outputPath: "../"
+          }
         }
       },
 
@@ -90,9 +108,14 @@ module.exports = {
       {
         test: /\.(ttf|eot|woff|woff2)$/,
         use: {
-          loader: "url-loader"
+          loader: "file-loader",
+          options: {
+            useRelativePath: true,
+            name: "[name].[ext]",
+            outputPath: "../"
+          }
         }
       }
     ]
-  },
+  }
 }

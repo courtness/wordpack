@@ -1,16 +1,20 @@
 
+let HEADER;
+
 export default class Header extends Resizable {
   constructor() {
     super();
 
-    this._template = {
+    HEADER = this;
+
+    HEADER._template = {
       $header : $(".wordpack-header")
     };
 
-    this.addHeaderListeners();
+    HEADER.initialize();
   }
 
-  addHeaderListeners = () => {
+  initialize = () => {
     // ...
   }
 }
