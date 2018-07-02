@@ -1,3 +1,4 @@
+import Resizable from "./modules/Resizable";
 
 let HEADER;
 

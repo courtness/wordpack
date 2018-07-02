@@ -1,0 +1,186 @@
+////////////
+
+// helpers
+
+.no-display {
+  display: none !important;
+}
+
+.no-margin {
+  margin: 0 !important;
+}
+
+.no-float {
+  float: none !important;
+}
+
+.no-opacity {
+  opacity: 0 !important;
+}
+
+.no-overflow {
+  overflow: hidden !important;
+}
+
+.no-transition {
+  transition: none !important;
+}
+
+.no-pointer {
+  pointer-events: none !important;
+}
+
+.cursor-pointer {
+  @include md-xl {
+    cursor: pointer;
+  }
+}
+
+.no-select {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  cursor: default;
+}
+
+.block-display {
+  display: block !important;
+}
+
+.gpu {
+  transform: translate3d(0,0,0);
+  backface-visibility: hidden;
+  perspective: 1000;
+  transform-style: preserve-3d;
+}
+
+.invert-x {
+  transform: scaleX(-1);
+}
+
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
+}
+
+.uppercase {
+  text-transform: uppercase !important;
+}
+
+.underline {
+  text-decoration: underline !important;
+}
+
+.text-left {
+  text-align: left !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+////////////
+
+// mobile
+
+.desktop-only {
+  @include xs-sm {
+    display: none !important;
+  }
+}
+
+.tablet-only {
+  @include md-xl {
+    display: none !important;
+  }
+
+  @include xs {
+    display: none !important;
+  }
+}
+
+.mobile-only {
+  @include md-xl {
+    display: none !important;
+  }
+
+  @include sm {
+    display: none !important;
+  }
+}
+
+
+////////////
+
+// template
+
+.default-template {
+  width: 100%;
+  position: relative;
+  margin: 0 auto;
+}
+
+.default-relative {
+  width: 100%;
+  position: relative;
+  margin: 0 auto;
+}
+
+.full-absolute {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  &.fill-width {
+    width: 100%;
+    height: auto;
+    bottom: auto;
+  }
+
+  &.fill-height {
+    width: auto;
+    height: 100%;
+  }
+
+  &.align-bottom {
+    top: auto;
+    bottom: 0;
+  }
+}
+
+.full-fixed {
+  @extend .full-absolute;
+
+  position: fixed;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &--column {
+    flex-direction: column;
+  }
+
+  &--wrap {
+    flex-wrap: wrap;
+  }
+}
+
+// ...

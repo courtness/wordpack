@@ -1,8 +1,12 @@
-@import '_reset';
-
 @import '_variables';
+@import '_mixins';
+
+@import 'vendor/reset';
+@import 'vendor/bootstrap';
+
 @import '_fonts';
 @import '_base';
+@import '_common';
 
 @import 'components/Header';
 @import 'components/Home';

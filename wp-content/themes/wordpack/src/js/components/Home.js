@@ -41,24 +41,6 @@ export default class Home extends WordpressTemplate {
           break;
       }
     });
-
-    imageService.setImageCache($(`.image-class[data-src]:not([data-src=""])`));
-
-    videoService.setVideos($(".video-class"));
-
-    wordpressAdminService.getFromAdminAction("admin_get_function").then((response) => {
-      console.log("Admin: ", response);
-    }, (error) => {
-      console.error("Error: ", error);
-      throw error;
-    });
-
-    wordpressAdminService.postToAdminAction("admin_post_function", { data : data }).then((response) => {
-      console.log("Admin: ", response);
-    }, (error) => {
-      console.error("Error: ", error);
-      throw error;
-    });
   }
 }
 

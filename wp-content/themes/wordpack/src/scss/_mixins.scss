@@ -1,0 +1,109 @@
+////////////
+
+// screen widths
+
+// < 768px
+@mixin xs {
+  @media screen and (max-width: $screen-sm - 1) {
+    @content;
+  }
+}
+
+// < 1024px;
+@mixin xs-sm {
+  @media screen and (max-width: $screen-md - 1) {
+    @content;
+  }
+}
+
+// < 1440px;
+@mixin xs-md {
+  @media screen and (max-width: $screen-lg - 1) {
+    @content;
+  }
+}
+
+// < 1920px;
+@mixin xs-md {
+  @media screen and (max-width: $screen-xl - 1) {
+    @content;
+  }
+}
+
+// 768px - 1023px
+@mixin sm {
+  @media screen and (min-width: $screen-sm) and (max-width: $screen-md - 1) {
+    @content;
+  }
+}
+
+// 768px - 1439px;
+@mixin sm-md {
+  @media screen and (min-width: $screen-sm) and (max-width: $screen-lg - 1) {
+    @content;
+  }
+}
+
+// 768px - 1919px;
+@mixin sm-lg {
+  @media screen and (min-width: $screen-sm) and (max-width: $screen-xl - 1) {
+    @content;
+  }
+}
+
+// >= 768px
+@mixin sm-xl {
+  @media screen and (min-width: $screen-sm) {
+    @content;
+  }
+}
+
+// 1024px - 1439px
+@mixin md {
+  @media screen and (min-width: $screen-md) and (max-width: $screen-lg - 1) {
+    @content;
+  }
+}
+
+// 1024px - 1919px
+@mixin md-lg {
+  @media screen and (min-width: $screen-md) and (max-width: $screen-xl - 1) {
+    @content;
+  }
+}
+
+// >= 1024px
+@mixin md-xl {
+  @media screen and (min-width: $screen-md) {
+    @content;
+  }
+}
+
+// 1440px - 1919px
+@mixin lg {
+  @media screen and (min-width: $screen-lg) and (max-width: $screen-xl - 1) {
+    @content;
+  }
+}
+
+// >= 1440px
+@mixin lg-xl {
+  @media screen and (min-width: $screen-lg) {
+    @content;
+  }
+}
+
+// >= 1920px
+@mixin xl {
+  @media screen and (min-width: $screen-xl) {
+    @content;
+  }
+}
+
+@mixin high-dpi {
+  @media
+  (-webkit-min-device-pixel-ratio: 1.5),
+  (min-resolution: 144dpi) {
+    @content;
+  }
+}

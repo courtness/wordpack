@@ -2,54 +2,53 @@
 
 // color hexes
 
-$black : "#000000";
-$white : "#ffffff";
+$colors: (
+  black : #000000,
+  white : #ffffff
+);
 
-.bg-black {
-  background-color: black;
+@function color($key) {
+  @if map-has-key($colors, $key) {
+    @return map-get($colors, $key);
+  }
+
+  @warn "Unknown `#{$key}` in $colors.";
+  @return null;
 }
 
-.bg-white {
-  background-color: white;
-}
+
+// font colors
+
+.black { color: color(black) !important; }
+.white { color: color(white) !important; }
 
 // ...
 
+
+// background colors
+
+.bg-black { background-color: color(black) !important; }
+.bg-white { background-color: color(white) !important; }
+
+// ...
+
+
 ////////////
 
-// devices
+// grid
 
-$mobile-width : 768px;
-$tablet-width : 1024px;
+$screen-sm: 768px;
+$screen-md: 1024px;
+$screen-lg: 1440px;
+$screen-xl: 1920px;
+$gutter: 0;
+$margin: 0.25rem;
 
-@mixin mobile {
-  @media screen and (max-width: $mobile-width - 1) {
-    @content;
-  }
-}
 
-@mixin tablet {
-  @media screen and (min-width: $mobile-width) and (max-width: $tablet-width) {
-    @content;
-  }
-}
+////////////
 
-@mixin tablet-and-mobile {
-  @media screen and (max-width: $tablet-width) {
-    @content;
-  }
-}
+// transitions
 
-@mixin desktop {
-  @media screen and (min-width: $tablet-width + 1) {
-    @content;
-  }
-}
-
-@mixin high-dpi {
-  @media
-  (-webkit-min-device-pixel-ratio: 1.5),
-  (min-resolution: 144dpi) {
-    @content;
-  }
-}
+$default-transition-speed: 300ms;
+$ease-out-cubic: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+$default-transition: $default-transition-speed $ease-out-cubic;

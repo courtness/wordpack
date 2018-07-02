@@ -1,46 +1,56 @@
 import { eventService } from "./../../services/EventService";
 import { isMobile, isTablet, isDesktop } from "./../../utils/screen";
 
+let RESIZABLE;
+
 export default class Resizable {
   constructor() {
-    this.state = {
+    RESIZABLE = this;
+
+    RESIZABLE.state = {
       device: "desktop",
       windowWidth: document.documentElement.clientWidth,
       windowHeight: document.documentElement.clientHeight
     };
 
-    this.addDefaultResizeHandler();
+    RESIZABLE.updateDevice();
+
+    RESIZABLE.addDefaultResizeHandler();
   }
 
   defaultResizeHandler = () => {
-    this.state.windowWidth = document.documentElement.clientWidth;
-    this.state.windowHeight = document.documentElement.clientHeight;
+    RESIZABLE.state.windowWidth = document.documentElement.clientWidth;
+    RESIZABLE.state.windowHeight = document.documentElement.clientHeight;
 
-    let oldDevice = this.state.device;
+    let oldDevice = RESIZABLE.state.device;
 
-    if (isMobile()) {
-      this.state.device = "mobile";
-    } else if (isTablet()) {
-      this.state.device = "tablet";
-    } else {
-      this.state.device = "desktop";
-    }
+    RESIZABLE.updateDevice();
 
-    if (oldDevice !== this.state.device) {
-      eventService.emitDataByKey("device", this.state.device);
+    if (oldDevice !== RESIZABLE.state.device) {
+      eventService.emitDataByKey("device", RESIZABLE.state.device);
     }
 
     eventService.emitDataByKey("resize", {
-      width: this.state.windowWidth,
-      height: this.state.windowHeight
+      width: RESIZABLE.state.windowWidth,
+      height: RESIZABLE.state.windowHeight
     });
   }
 
   addDefaultResizeHandler = () => {
-    window.addEventListener("resize", this.defaultResizeHandler, true);
+    window.addEventListener("resize", RESIZABLE.defaultResizeHandler, true);
   }
 
   removeDefaultResizeHandler = () => {
-    window.removeEventListener("resize", this.defaultResizeHandler, true);
+    window.removeEventListener("resize", RESIZABLE.defaultResizeHandler, true);
+  }
+
+  updateDevice = () => {
+    if (isMobile()) {
+      RESIZABLE.state.device = "mobile";
+    } else if (isTablet()) {
+      RESIZABLE.state.device = "tablet";
+    } else {
+      RESIZABLE.state.device = "desktop";
+    }
   }
 }

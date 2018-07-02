@@ -1,0 +1,136 @@
+
+@font-face {
+	font-family: "Some Font";
+	src: url("../../assets/fonts/Some Font.eot");
+	src: local("☺"),` url("../../assets/fonts/Some Font.woff") format("woff"), url("../../assets/fonts/Some Font.ttf") format("truetype"), url("../../assets/fonts/Some Font.svg") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+
+.some-font {
+  font-family: "Some Font";
+}
+
+
+//
+
+.d1 {
+  @include md-xl {
+  }
+
+  @include sm {
+  }
+
+  @include xs {
+  }
+}
+
+.d2 {
+  @include md-xl {
+  }
+
+  @include sm {
+  }
+
+  @include xs {
+  }
+}
+
+.d3 {
+  @include md-xl {
+  }
+
+  @include sm {
+  }
+
+  @include xs {
+  }
+}
+
+.d4 {
+  @include md-xl {
+  }
+
+  @include sm {
+  }
+
+  @include xs {
+  }
+}
+
+.h1 {
+  @include md-xl {
+  }
+
+  @include sm {
+  }
+
+  @include xs {
+  }
+}
+
+.h2 {
+  @include md-xl {
+  }
+
+  @include sm {
+  }
+
+  @include xs {
+  }
+}
+
+.h3 {
+  @include md-xl {
+  }
+
+  @include sm {
+  }
+
+  @include xs {
+  }
+}
+
+.h4 {
+  @include md-xl {
+  }
+
+  @include sm {
+  }
+
+  @include xs {
+  }
+}
+
+.b1 {
+  @include md-xl {
+  }
+
+  @include sm {
+  }
+
+  @include xs {
+  }
+}
+
+.b2 {
+  @include md-xl {
+  }
+
+  @include sm {
+  }
+
+  @include xs {
+  }
+}
+
+.b3 {
+  @include md-xl {
+  }
+
+  @include sm {
+  }
+
+  @include xs {
+  }
+}

@@ -33,23 +33,20 @@ input:focus{
   outline: none;
 }
 
+a,
+a:hover,
+a:visited {
+  color: inherit;
+}
 
 ////////////
 
 // layout
 
-.wrap {}
+.container {
+  @include desktop {
+    max-width: 1440px;
+  }
 
-////////////
-
-// helpers
-
-.hide-overflow {
-  overflow: hidden !important;
-}
-
-.gpu {
-  transform: translate3d(0,0,0);
-  backface-visibility: hidden;
-  perspective: 1000;
+  position: relative;
 }
