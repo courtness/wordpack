@@ -9,7 +9,7 @@ export default class Footer extends Resizable {
     FOOTER = this;
 
     FOOTER._template = {
-      $footer : $(".wordpack-footer")
+      $footer : $(".footer")
     };
 
     FOOTER.initialize();

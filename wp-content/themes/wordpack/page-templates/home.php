@@ -9,7 +9,7 @@
   get_header();
 ?>
 
-  <div id="template-root" class="wordpack-home" data-component="Home">
+  <div id="template-root" class="home" data-component="Home">
     <h1>home</h1>
   </div>
 

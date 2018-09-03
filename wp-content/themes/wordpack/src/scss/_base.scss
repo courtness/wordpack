@@ -44,7 +44,7 @@ a:visited {
 // layout
 
 .container {
-  @include desktop {
+  @include sm-xl {
     max-width: 1440px;
   }
 

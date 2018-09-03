@@ -14,11 +14,16 @@
  * @param bool $modified whether to append a modified query var or not
  * @return void
  */
-function wordpack_include( $file, $modified = false ) {
+function wordpack_include( $file, $modified = false, $echo = true ) {
   $url = get_stylesheet_directory_uri() . '/' . $file;
   if ( $modified ) $url .= '?v='.filemtime( get_template_directory() . '/' . $file );
-  echo $url;
+
+  if ( $echo )
+    echo $url;
+  else
+    return $url;
 }
+
 
 
 /**

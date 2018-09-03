@@ -40,4 +40,4 @@
     </div>
 
     <div class="wrap">
-      <header class="wordpack-header" data-component="Header"></header>
+      <header class="header" data-component="Header"></header>

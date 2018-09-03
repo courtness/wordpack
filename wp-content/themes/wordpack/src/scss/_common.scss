@@ -1,137 +1,53 @@
 ////////////
 
-// helpers
+// template
 
-.no-display {
-  display: none !important;
+.w-100 {
+  width: 100%;
 }
 
-.no-margin {
-  margin: 0 !important;
+.vw-100 {
+  width: 100vw;
 }
 
-.no-float {
-  float: none !important;
+.h-100 {
+  height: 100%;
 }
 
-.no-opacity {
-  opacity: 0 !important;
-}
-
-.no-overflow {
-  overflow: hidden !important;
-}
-
-.no-transition {
-  transition: none !important;
-}
-
-.no-pointer {
-  pointer-events: none !important;
-}
-
-.cursor-pointer {
-  @include md-xl {
-    cursor: pointer;
-  }
-}
-
-.no-select {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-
-  cursor: default;
+.vh-100 {
+  height: 100vh;
 }
 
 .block-display {
-  display: block !important;
+  display: block;
 }
 
-.gpu {
-  transform: translate3d(0,0,0);
-  backface-visibility: hidden;
-  perspective: 1000;
-  transform-style: preserve-3d;
+.inline-display {
+  display: inline-block;
 }
 
-.invert-x {
-  transform: scaleX(-1);
-}
-
-.float-left {
-  float: left;
-}
-
-.float-right {
-  float: right;
-}
-
-.uppercase {
-  text-transform: uppercase !important;
-}
-
-.underline {
-  text-decoration: underline !important;
-}
-
-.text-left {
-  text-align: left !important;
-}
-
-.text-center {
-  text-align: center !important;
-}
-
-.text-right {
-  text-align: right !important;
-}
-
-////////////
-
-// mobile
-
-.desktop-only {
-  @include xs-sm {
-    display: none !important;
-  }
-}
-
-.tablet-only {
-  @include md-xl {
-    display: none !important;
-  }
-
-  @include xs {
-    display: none !important;
-  }
-}
-
-.mobile-only {
-  @include md-xl {
-    display: none !important;
-  }
-
-  @include sm {
-    display: none !important;
-  }
-}
-
-
-////////////
-
-// template
-
-.default-template {
-  width: 100%;
+.relative {
   position: relative;
-  margin: 0 auto;
 }
 
-.default-relative {
+.absolute {
+  position: absolute;
+}
+
+.fixed {
+  position: fixed;
+}
+
+.sticky {
+  position: sticky;
+}
+
+.clear-col {
+  clear: both;
+  float: none;
+}
+
+.center-relative {
   width: 100%;
   position: relative;
   margin: 0 auto;
@@ -169,10 +85,25 @@
   position: fixed;
 }
 
-.flex-center {
+.flex {
   display: flex;
   align-items: center;
-  justify-content: center;
+
+  &--justifycenter {
+    justify-content: center;
+  }
+
+  &--justifyleft {
+    justify-content: left;
+  }
+
+  &--justifybetween {
+    justify-content: space-between;
+  }
+
+  &--alignstart {
+    align-items: flex-start;
+  }
 
   &--column {
     flex-direction: column;
@@ -183,4 +114,149 @@
   }
 }
 
-// ...
+.invert-x {
+  transform: scaleX(-1);
+}
+
+.desktop-only {
+  @include xs-sm {
+    display: none !important;
+  }
+}
+
+.tablet-only {
+  @include md-xl {
+    display: none !important;
+  }
+
+  @include xs {
+    display: none !important;
+  }
+}
+
+.mobile-only {
+  @include md-xl {
+    display: none !important;
+  }
+
+  @include sm {
+    display: none !important;
+  }
+}
+
+////////////
+
+// transitions
+
+.fadeable {
+  transition: $default-transition opacity;
+
+  pointer-events: none;
+  opacity: 0;
+
+  &.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  &--fast {
+    transition: $fast-transition opacity;
+  }
+
+  &--slow {
+    transition: $slow-transition opacity;
+  }
+}
+
+
+////////////
+
+// helpers
+
+.no-display {
+  display: none !important;
+}
+
+.no-margin {
+  margin: 0 !important;
+}
+
+.no-float {
+  float: none !important;
+}
+
+.no-opacity {
+  opacity: 0 !important;
+}
+
+.no-overflow {
+  overflow: hidden !important;
+}
+
+.no-transition {
+  transition: none !important;
+}
+
+.no-pointer {
+  pointer-events: none !important;
+}
+
+.auto-pointer {
+  pointer-events: auto !important;
+}
+
+.cursor-pointer {
+  @include md-xl {
+    cursor: pointer !important;
+  }
+}
+
+.no-select {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  cursor: default;
+}
+
+.block-display {
+  display: block !important;
+}
+
+.gpu {
+  transform: translate3d(0,0,0);
+  backface-visibility: hidden;
+  perspective: 1000;
+  transform-style: preserve-3d;
+}
+
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
+}
+
+.uppercase {
+  text-transform: uppercase !important;
+}
+
+.underline {
+  text-decoration: underline !important;
+}
+
+.text-left {
+  text-align: left !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.text-right {
+  text-align: right !important;
+}

@@ -1,5 +1,5 @@
 
-      <footer class="wordpack-footer" data-component="Footer">
+      <footer class="footer" data-component="Footer">
       </footer>
     </div><!-- .wrap -->
 

@@ -9,7 +9,7 @@ export default class Header extends Resizable {
     HEADER = this;
 
     HEADER._template = {
-      $header : $(".wordpack-header")
+      $header : $(".header")
     };
 
     HEADER.initialize();
