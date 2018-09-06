@@ -16,21 +16,10 @@ $colors: (
   @return null;
 }
 
-
-// font colors
-
-.black { color: color(black) !important; }
-.white { color: color(white) !important; }
-
-// ...
-
-
-// background colors
-
-.bg-black { background-color: color(black) !important; }
-.bg-white { background-color: color(white) !important; }
-
-// ...
+@each $name, $value in $colors {
+  .#{$name} { color: #{$value} }
+  .bg-#{$name} { background-color: #{$value} }
+}
 
 
 ////////////
