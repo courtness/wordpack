@@ -10,15 +10,15 @@ My baseline WIP for new Wordpress projects using Webpack 4. Includes:
 - JS chunk/hash config, CSS post-processing
 - Wordpress chunk enqueues
 
-Comprised only of the `/wp-content/themes/wordpack`; assumes 'wordpack' as the theme name.
+Comprised only of the Wordpress `/wp-content/themes/wordpack` folder; requires all other Wordpress folders be extracted at the root dir (see below) and 'wordpack' as the theme name.
 
 
 ## Installation
 
 
-Requires Wordpress be extracted at the root dir, with `wp-config.php` configured with DB credentials. 
+Grab the latest.zip from wordpress.org and extract all folders except `wp-content` to the Wordpack root dir. Add `wp-config.php` and configure with DB as normal.
 
-Next configure: 
+Next, configure: 
 
 ```
 /wp-content/themes/wordpack/config/webpack.config.js
@@ -41,11 +41,11 @@ The `scripts` in `package.json` describe how to watch/build the theme core:
 yarn watch
 ```
 
-Will start the BS proxy, while:
+will start the BS proxy, while:
 
 
 ```
 yarn build
 ```
 
-Will build optimized assets.
+will compile optimized assets, both using `dist/` as the target location.
