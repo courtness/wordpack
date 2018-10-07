@@ -1,0 +1,37 @@
+////////////
+
+// helpers
+
+@function str-replace($string, $search, $replace: "") {
+  $index: str-index($string, $search);
+
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+
+  @return $string;
+}
+
+@function str-capitalize($string) {
+  @return to-upper-case(str-slice($string, 1, 1)) + str-slice($string, 2);
+}
+
+@function str-capicamelize($string) {
+  $progress: $string;
+  $result: "";
+
+  $running: true;
+
+  @while $running {
+    $index: str-index($progress, " ");
+
+    @if $index {
+      $result: $result + str-capitalize(str-slice($progress, 1, $index));
+      $progress: str-slice($progress, ($index + 1));
+    } @else {
+      $running: false;
+    }
+  }
+
+  @return str-capitalize($result) + str-capitalize($progress);
+}

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html <?php language_attributes() ?>>
+<html <?php language_attributes(); ?>>
   <head>
-    <meta charset="<?php bloginfo( 'charset' ) ?>">
+    <meta charset="<?php bloginfo( 'charset' ); ?>">
     <!--noptimize--><!--
     This site was made with
 
@@ -18,26 +18,18 @@
     --><!--/noptimize-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-    <meta name="description" content="Wordpress + Webpack">
+    <meta name="description" content="Vera Babida">
 
     <link rel="shortcut icon" sizes="16x16 32x32" href="<?php echo site_url() ?>/favicon.ico">
 
-    <title><?php wp_title( '' ) ?></title>
+    <title><?php wp_title( '' ); ?></title>
 
-    <?php if ( ENVIRONMENT == 'development' ): ?>
-      <link rel="stylesheet" href="<?php wordpack_include( 'dist/css/app.css', true ) ?>" type="text/css" media="screen">
-    <?php else: ?>
-      <link rel="stylesheet" href="<?php wordpack_include( 'dist/css/app.min.css', true ) ?>" type="text/css" media="screen">
-    <?php endif ?>
+    <?php include( locate_template( 'partials/scripts/tracking-head.php' ) ); ?>
 
-    <?php wp_head() ?>
+    <?php wp_head(); ?>
   </head>
-  <body <?php body_class() ?>>
-    <div id="wp-url" data-baseurl="<?php echo get_site_url(); ?>"
-      data-adminurl="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>"
-      data-ajaxurl="<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>"
-      data-themeurl="<?php echo esc_url( get_template_directory_uri() ); ?>">
-    </div>
+  <body>
+    <?php include( locate_template( 'partials/scripts/wp-data.php' ) ); ?>
+    <?php include( locate_template( 'partials/overlays/index.php' ) ); ?>
 
-    <div class="wrap">
-      <header class="header" data-component="Header"></header>
+    <div id="wrap" class="relative">

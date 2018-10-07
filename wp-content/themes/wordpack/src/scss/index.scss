@@ -1,13 +1,24 @@
-@import '_variables';
-@import '_mixins';
-
 @import 'vendor/reset';
-@import 'vendor/bootstrap';
+@import 'utils/helpers';
 
+@import '_screen';
+@import '_colors';
 @import '_fonts';
+@import '_transitions';
+
 @import '_base';
 @import '_common';
 
+@import 'partials/block-button';
+@import 'partials/hover-button';
+@import 'partials/icon-add';
+@import 'partials/icon-favourite';
+@import 'partials/newsletter';
+@import 'partials/overlays';
+@import 'partials/product-grid';
+@import 'partials/concierge-link';
+
 @import 'components/Header';
-@import 'components/Home';
 @import 'components/Footer';
+
+@import 'components/Home';

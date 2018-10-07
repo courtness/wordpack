@@ -1,6 +1,20 @@
 ////////////
 
-// screen widths
+// screen
+
+$screen-sm: 768px;
+$screen-md: 1024px;
+$screen-lg: 1440px;
+$screen-xl: 1920px;
+
+$columns: 12;
+
+$header-padding : 121px;
+$header-padding-mobile : 64px;
+
+$columns: (
+  12: 'col'
+);
 
 // < 768px
 @mixin xs {
@@ -105,5 +119,41 @@
   (-webkit-min-device-pixel-ratio: 1.5),
   (min-resolution: 144dpi) {
     @content;
+  }
+}
+
+////////////
+
+// grid
+
+@function grid-blocks($count, $columns) {
+  @return ((1 / $columns) * $count) * 100vw;
+}
+
+@each $length, $prefix in $columns {
+  @for $i from 1 through $length {
+    $width: grid-blocks($i, $length);
+
+    .#{$prefix}-#{$i} { width: $width; }
+
+    @include xs {
+      .#{$prefix}-xs-#{$i} { width: $width; }
+    }
+
+    @include sm {
+      .#{$prefix}-sm-#{$i} { width: $width; }
+    }
+
+    @include sm-xl {
+      .#{$prefix}-smxl-#{$i} { width: $width; }
+    }
+
+    @include md {
+      .#{$prefix}-md-#{$i} { width: $width; }
+    }
+
+    @include md-xl {
+      .#{$prefix}-mdxl-#{$i} { width: $width; }
+    }
   }
 }

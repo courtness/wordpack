@@ -1,14 +1,14 @@
 <?php
 /**
- * Functions that run on WordPress Admin
- * For some reason, you can't use admin.php as a file name
- * Hence the yuck admin-functions.php name
+ * WordPress Admin Functions
  *
- * @package Wordpack
- * @since Wordpack 0.1
+ * @package Frank Darling
+ * @since Frank Darling 0.1
  */
 
+//
 // Hide Yoast SEO by Default
+
 function hide_yoast( $hidden ) {
   $hidden[] = 'wpseo_meta';
   return $hidden;
@@ -16,10 +16,9 @@ function hide_yoast( $hidden ) {
 add_filter( 'default_hidden_meta_boxes', 'hide_yoast' );
 
 /**
- * Hides some of the useless Yoast bloat, which can no longer be removed by hooks
+ * Remove Yoast blod
  * https://github.com/Yoast/wordpress-seo/issues/3464
  * https://wordpress.org/support/topic/please-remove-your-invasive-update-message
- *
  */
 function remove_yeost_bloat() {
   echo '<style>
@@ -36,14 +35,47 @@ add_action('admin_head', 'remove_yeost_bloat');
 
 add_filter( 'wpseo_stopwords', '__return_empty_array' );
 
-// Move Yoast SEO metabox to bottom
-function wordpack_wpseo_metabox_prio() {
+function wpseo_metabox_prio() {
   return 'low';
 }
-add_filter('wpseo_metabox_prio', 'wordpack_wpseo_metabox_prio');
+add_filter('wpseo_metabox_prio', 'wpseo_metabox_prio');
 
+//
+// Show ACF options
 
-// remove emojis
+if ( function_exists( 'acf_add_options_page' ) ) {
+  acf_add_options_page();
+}
+
+//
+// hide content editor
+
+function hide_editor() {
+  global $_wp_post_type_features;
+
+  $post_type = 'page';
+  $feature = 'editor';
+
+  if ( !isset( $_wp_post_type_features[$post_type] ) ) {
+
+  } elseif ( isset( $_wp_post_type_features[ $post_type ][ $feature ] ) ) {
+    unset( $_wp_post_type_features[ $post_type ][ $feature ] );
+  }
+}
+
+add_action('init', 'hide_editor');
+
+//
+// deregister unwanted scripts
+
+function deregister_scripts() {
+  wp_deregister_script( 'wp-embed' );
+}
+add_action( 'wp_footer', 'deregister_scripts' );
+
+//
+// remove emojicon support
+
 function disable_wp_emojicons() {
   remove_action( 'admin_print_styles', 'print_emoji_styles' );
   remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
@@ -52,5 +84,15 @@ function disable_wp_emojicons() {
   remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
   remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
   remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
+
+  add_filter( 'tiny_mce_plugins', 'disable_emojicons_tinymce' );
 }
 add_action( 'init', 'disable_wp_emojicons' );
+
+function disable_emojicons_tinymce( $plugins ) {
+  if ( is_array( $plugins ) ) {
+    return array_diff( $plugins, array( 'wpemoji' ) );
+  } else {
+    return array();
+  }
+}

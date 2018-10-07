@@ -27,16 +27,6 @@ export function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-export function isInViewport($element) {
-  var elementTop = $element.offset().top;
-  var elementBottom = elementTop + $element.outerHeight();
-
-  var viewportTop = $(window).scrollTop();
-  var viewportBottom = viewportTop + $(window).height();
-
-  return elementBottom > viewportTop && elementTop < viewportBottom;
-}
-
 export function parseUrlArgs() {
   let query = location.search.substr(1);
   let result = {};

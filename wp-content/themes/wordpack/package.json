@@ -1,33 +1,56 @@
 {
   "name": "Wordpack",
   "version": "1.0.0",
-  "description": "Love + Money Wordpress/Webpack Starter Theme",
+  "description": "Wordpress/Webpack 4 Boilerplate",
   "main": "index.js",
-  "scripts": {},
-  "author": "<3 + $",
+  "scripts": {
+    "watch": "webpack --watch --config ./webpack.dev.js",
+    "stage": "webpack --config ./webpack.staging.js",
+    "build": "webpack --config ./webpack.prod.js"
+  },
+  "author": "Dan Courtness",
   "license": "ISC",
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "css-loader": "^0.28.8",
-    "extract-text-webpack-plugin": "^3.0.2",
-    "file-loader": "^1.1.6",
-    "node-sass": "^4.7.2",
-    "postcss": "^6.0.16",
-    "postcss-import": "^11.0.0",
-    "postcss-loader": "^2.0.10",
-    "proxy-polyfill": "^0.2.0",
-    "sass-loader": "^6.0.6",
-    "style-loader": "^0.19.1",
-    "uglify-js": "^3.3.5",
-    "webpack": "^3.10.0"
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/preset-env": "^7.1.0",
+    "babel-loader": "^8.0.4",
+    "babel-plugin-root-import": "^6.1.0",
+    "browser-sync": "^2.24.7",
+    "browser-sync-webpack-plugin": "^2.2.2",
+    "clean-webpack-plugin": "^0.1.19",
+    "css-loader": "^1.0.0",
+    "cssnano": "^4.1.4",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "file-loader": "^2.0.0",
+    "mini-css-extract-plugin": "^0.4.3",
+    "node-sass": "^4.9.3",
+    "postcss-import": "^12.0.0",
+    "postcss-loader": "^3.0.0",
+    "postcss-preset-env": "^6.0.10",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.0",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-middleware": "^3.4.0",
+    "webpack-hot-middleware": "^2.24.2",
+    "webpack-merge": "^4.1.4",
+    "webpack-php-manifest": "^0.0.5"
   },
-  "dependencies": {
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "compression-webpack-plugin": "^1.1.11",
-    "jquery": "3.2.1",
-    "url-loader": "^0.6.2"
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-class-properties",
+      "@babel/plugin-syntax-dynamic-import",
+      [
+        "babel-plugin-root-import",
+        {
+          "rootPathPrefix": "@"
+        }
+      ]
+    ]
   }
 }

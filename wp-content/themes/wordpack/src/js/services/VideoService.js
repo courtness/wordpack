@@ -1,47 +1,51 @@
+import { documentService } from "@/src/js/services/DocumentService";
+import { eventService } from "@/src/js/services/EventService";
+import { query } from "@/src/js/utils/dom.js";
+import { getAbsolutePosition, inViewport } from "@/src/js/utils/screen";
 
 class VideoService {
   constructor() {
-    this._template = {
-      $videos : {}
-    };
+    this._initialized = false;
+
+    this.initialize();
   }
 
-  setVideos = ($videos, save) => {
-    $videos.each((index, element) => {
-      let $element = $(element);
+  initialize = () => {
+    if (this._initialized) {
+      return;
+    }
 
-      $element[0].onplaying = function() {
-        $element[0].playing = true;
-      };
+    this._initialized = true;
+  }
 
-      $element[0].onpause = function() {
-        $element[0].playing = false;
-      };
+  setPlaybackListeners = (videos) => {
+    if (!videos || videos.length === 0) {
+      return;
+    }
+
+    if (videos.length === 1) {
+      videos = [ videos ];
+    }
+
+    videos.forEach((video) => {
+      video[0].onplaying = function() {
+        video.playing = true;
+      }
+
+      video[0].onpause = function() {
+        video.playing = false;
+      }
     });
 
-    if (save) {
-      this._template.$videos = $videos;
-    }
-  }
-
-  getVideos = () => {
-    return this._template.$videos;
-  }
-
-  pauseVideos = ($videos) => {
-    if (!$videos) {
-      $videos = this._template.$videos;
-    }
-
-    for (let $video of $videos) {
-      if (typeof $video[0].playing === "undefined" || $video[0].playing === null) {
-        $video[0].playing = true;
-      }
-
-      if ($video[0].playing) {
-        $video[0].pause();
-      }
-    }
+    eventService.on(`scroll`, (scrollData) => {
+      videos.forEach((video) => {
+        if (!inViewport(video[0], scrollData.scrollTop)) {
+          video[0].pause();
+        } else {
+          video[0].play();
+        }
+      });
+    });
   }
 }
 

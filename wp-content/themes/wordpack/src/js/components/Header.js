@@ -1,23 +1,17 @@
-import Resizable from "./modules/Resizable";
+import { query } from "@/src/js/utils/dom.js";
 
-let HEADER;
-
-export default class Header extends Resizable {
+export default class Home {
   constructor() {
-    super();
-
-    HEADER = this;
-
-    HEADER._template = {
-      $header : $(".header")
+    this._template = {
+      header : query(`header`)
     };
 
-    HEADER.initialize();
+    this.initialize();
   }
 
   initialize = () => {
-    // ...
+    console.log(`Header`);
   }
 }
 
-new Header();
+new Home();

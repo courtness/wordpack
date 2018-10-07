@@ -1,99 +1,25 @@
+import { query } from "./../utils/dom";
 import { isEmpty } from "./../utils/helpers";
 
 class WordpressAdminService {
   constructor() {
-    this._wpAdminUrl = $("#wp-url").data("adminurl");
-    this._wpAjaxUrl = $("#wp-url").data("ajaxurl");
-    this._wpThemeUrl =  $("#wp-url").data("themeurl");
-
-    $("#wp-url").remove();
+    this._wpAdminUrl;
+    this._wpAjaxUrl;
   }
 
   //
-  // admin functions
 
-  setAdminUrl = (wpAdminUrl) => {
-    this._wpAdminUrl = wpAdminUrl;
-  }
+  initialize = () => {
+    let wpUrl = query(`#wp-url`)[0];
 
-  getFromAdminAction = (action) => {
-    return new Promise((resolve, reject) => {
-      let check = this.validateRequest(this._wpAdminUrl, action);
+    this._wpAdminUrl = wpUrl.getAttribute(`data-adminurl`);
+    this._wpAjaxUrl = wpUrl.getAttribute(`data-ajaxurl`);
 
-      if (!check.valid) {
-        reject(check.error);
-      }
-
-      $.ajax({
-        url : this._wpAdminUrl,
-        method : "get",
-        data : {
-          action : action
-        },
-        success : (response) => {
-          resolve(response);
-        },
-        error : (response) => {
-          reject(response);
-        }
-      });
-    });
-  }
-
-  postToAdminAction = (action, data) => {
-    return new Promise((resolve, reject) => {
-      let check = this.validateRequestWithData(this._wpAdminUrl, action, data);
-
-      if (!check.valid) {
-        reject(check.error);
-      }
-
-      data.action = action;
-
-      $.ajax({
-        url : this._wpAdminUrl,
-        method : "post",
-        data : data,
-        success : (response) => {
-          resolve(response);
-        },
-        error : (error) => {
-          reject(error);
-        }
-      });
-    });
+    wpUrl.parentNode.removeChild(wpUrl);
   }
 
   //
   // ajax functions
-
-  setAjaxUrl = (wpAjaxUrl) => {
-    this._wpAjaxUrl = wpAjaxUrl;
-  }
-
-  getFromAjaxAction = (action) => {
-    return new Promise((resolve, reject) => {
-      let check = this.validateRequest(this._wpAjaxUrl, action);
-
-      if (!check.valid) {
-        reject(check.error);
-      }
-
-      $.ajax({
-        url : this._wpAjaxUrl,
-        method : "get",
-        data : {
-          action : action
-        },
-        success : (response) => {
-          resolve(response);
-        },
-        error : (error) => {
-          reject(error);
-        }
-      });
-    });
-  }
 
   postToAjaxAction = (action, data) => {
     return new Promise((resolve, reject) => {
@@ -103,53 +29,26 @@ class WordpressAdminService {
         reject(check.error);
       }
 
-      data.action = action;
+      let body = `action=${action}&data=${JSON.stringify(data)}`;
 
-      $.ajax({
-        url : this._wpAjaxUrl,
-        method : "post",
-        data : data,
-        success : (response) => {
-          resolve(response);
-        },
-        error : (error) => {
-          reject(error);
-        }
-      });
-    });
-  }
-
-  //
-  // theme files
-
-  setThemeUrl = (wpThemeUrl) => {
-    this._wpThemeUrl = wpThemeUrl;
-  }
-
-  getThemeFile = (path, dataType) => {
-    if (!dataType) {
-      dataType = "json"
-    }
-
-    return new Promise((resolve, reject) => {
-      let check = this.validateRequest(this._wpThemeUrl, action);
-
-      if (!check.valid) {
-        reject(check.error);
+      let request = {
+        body : body,
+        credentials : "same-origin",
+        headers : new Headers({
+          "Content-Type": "application/x-www-form-urlencoded; charset=utf-8"
+        }),
+        method : "POST"
       }
 
-      $.ajax({
-        url : `${this._wpThemeUrl}/${path}`,
-        action : "get",
-        dataType : dataType,
-        encode : true,
-        success : (data) => {
-          resolve(data);
-        },
-        error : (error) => {
+      fetch(this._wpAjaxUrl, request)
+        .then(this.fetchHandler)
+        .then((response) => response.text())
+        .then((body) => {
+          resolve(body);
+        })
+        .catch((error) => {
           reject(error);
-        }
-      });
+        });
     });
   }
 
@@ -176,6 +75,14 @@ class WordpressAdminService {
     }
 
     return { valid: true }
+  }
+
+  fetchHandler = (response) => {
+    if (!response.ok) {
+      throw Error(response.status);
+    }
+
+    return response;
   }
 }
 

@@ -13,4 +13,4 @@
     <h1>home</h1>
   </div>
 
-<?php get_footer() ?>
+<?php get_footer(); ?>

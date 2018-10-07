@@ -1,14 +1,13 @@
-require("../scss/index.scss");
-
-import jQuery from "jquery";
+import { wordpressAdminService } from "@/src/js/services/WordpressAdminService";
 
 (global => {
-  window.$ = jQuery;
-  window.baseURL = $("#wp-url").data("baseurl");
+  window.baseURL = document.getElementById(`wp-url`).getAttribute(`data-baseurl`);
 
-  $(document).ready(function() {
-    $("[data-component]").each((index, element) => {
-      require("./components/" + $(element).data("component"));
+  wordpressAdminService.initialize();
+
+  document.addEventListener(`DOMContentLoaded`, () => {
+    document.querySelectorAll(`[data-component]`).forEach((element) => {
+      import(/* webpackChunkName: "chunk-[request]" */ `./components/${element.getAttribute(`data-component`)}`);
     });
   });
 })(window);

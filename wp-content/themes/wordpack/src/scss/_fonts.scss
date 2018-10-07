@@ -1,71 +1,105 @@
+////////////
 
-// @font-face {
-// 	font-family: "Some Font";
-// 	src: url("../../assets/fonts/Some Font.eot");
-// 	src: local("☺"), url("../../assets/fonts/Some Font.woff") format("woff"), url("../../assets/fonts/Some Font.ttf") format("truetype"), url("../../assets/fonts/Some Font.svg") format("svg");
-// 	font-weight: normal;
-// 	font-style: normal;
-// }
-//
-// .some-font {
-//   font-family: "Some Font";
-// }
+// fonts
 
+$fonts : (
+  'louize-display-trial' : (
+    'bold',
+    'regular'
+  ),
+  'akzidenz-grotesk-bq' : (
+    'bold',
+    'regular'
+  ),
+);
+
+@each $name, $weights in $fonts {
+  @each $weight in $weights {
+    @font-face {
+    	font-family: str-capicamelize(str-replace($name, '-', ' '));
+    	src: url('../../assets/fonts/#{$name}/#{$name}-#{$weight}.eot');
+    	src: local('☺'), url('../../assets/fonts/#{$name}/#{$name}-#{$weight}.woff') format('woff'), url('../../assets/fonts/#{$name}/#{$name}-#{$weight}.ttf') format('truetype'), url('../../assets/fonts/#{$name}/#{$name}-#{$weight}.svg') format('svg');
+    	font-weight: normal;
+    	font-style: normal;
+    }
+  }
+
+  .#{$name} {
+    font-family: str-capicamelize(str-replace($name, '-', ' '));
+  }
+}
 
 //
 
 .h1 {
-  @include md-xl {
-  }
-
-  @include sm {
+  @include sm-xl {
+    font-size: 144px;
+    line-height: 144px;
   }
 }
 
 .h2 {
-  @include md-xl {
+	font-size: 55px;
+	line-height: 50px;
+
+  @include sm-xl {
+    font-size: 60px;
+    line-height: 60px;
   }
 
-  @include sm {
-  }
+	@media screen and (min-width: 1024px) and (max-width: 1280px) {
+		font-size: 48px;
+    line-height: 48px;
+	}
 }
 
 .h3 {
-  @include md-xl {
-  }
+	font-size: 36px;
+	line-height: 36px;
 
-  @include sm {
+  @include sm-xl {
+    font-size: 36px;
+    line-height: 36px;
+		// TODO : look into this
+		letter-spacing: 1px;
   }
 }
 
 .h4 {
-  @include md-xl {
-  }
+	font-size: 22px;
+	line-height: 27px;
 
-  @include sm {
+  @include sm-xl {
+    // font-size: 36px;
+    // line-height: 36px;
   }
 }
 
-.b1 {
-  @include md-xl {
-  }
+//
 
-  @include sm {
+.b1 {
+	font-size: 14px;
+	line-height: 18px;
+
+  @include sm-xl {
+    font-size: 18px;
+    line-height: 24px;
   }
 }
 
 .b2 {
-  @include md-xl {
-  }
+	font-size: 11px;
+	line-height: 15px;
 
-  @include sm {
+  @include sm-xl {
+    font-size: 14px;
+    line-height: 18px;
   }
 }
 
 .b3 {
-  @include md-xl {
-  }
-
-  @include sm {
+  @include sm-xl {
+    font-size: 10px;
+    line-height: 11px;
   }
 }
