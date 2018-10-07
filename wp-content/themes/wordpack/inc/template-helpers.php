@@ -34,7 +34,7 @@ function template_include( $file, $modified = false, $echo = true ) {
 function abs_url( $path = '', $echo = true ) {
   $url = site_url() . $path;
 
-  if ( $echo ) P
+  if ( $echo ) {
     echo $url;
   } else {
     return $url;
@@ -85,7 +85,7 @@ function thumbnail_background( $post_id = null, $size = 'large' ) {
  * @param int $post_id the id of the post to check
  * @return void
  */
-function wordpack_custom_background( $field_name, $post_id = null, $size = 'large' ) {
+function custom_background( $field_name, $post_id = null, $size = 'large' ) {
   if ( $post_id == null ) {
     global $post;
     $post_id = $post->ID;
@@ -98,4 +98,23 @@ function wordpack_custom_background( $field_name, $post_id = null, $size = 'larg
 
     echo ' style="background-image:url(' . $large_image_url[0] . ')"';
   }
+}
+
+/**
+ * Makes strings SEO friendly:
+ * - Lowercase
+ * - Alphanumeric
+ * - Clear multiple hyphen/whitespace
+ * - Replace whitespace/underscore with dash
+ *
+ * @param int $post_id the id of the post to check
+ * @return void
+ */
+function seoify($string) {
+  $string = strtolower($string);
+  $string = preg_replace("/[^a-z0-9_\s-]/", "", $string);
+  $string = preg_replace("/[\s-]+/", " ", $string);
+  $string = preg_replace("/[\s_]/", "-", $string);
+
+  return $string;
 }

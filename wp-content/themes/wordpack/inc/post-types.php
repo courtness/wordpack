@@ -6,6 +6,8 @@
  * @since Wordpack 0.1
  */
 
+add_theme_support( 'post-thumbnails' );
+
 function init_post_types() {
   //
   // e.g. products

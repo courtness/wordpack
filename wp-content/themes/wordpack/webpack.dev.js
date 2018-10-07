@@ -3,7 +3,6 @@ const webpack = require(`webpack`);
 const merge = require(`webpack-merge`);
 
 const BrowserSyncPlugin = require(`browser-sync-webpack-plugin`);
-const ExtractTextPlugin = require(`extract-text-webpack-plugin`);// TODO : Hot reloads without this, once supported
 
 module.exports = merge(common, {
   mode: `development`,
@@ -42,37 +41,25 @@ module.exports = merge(common, {
       open: false,
       reloadDelay: 0
     }),
-    new ExtractTextPlugin(`./css/${common.externals.webpackConfig.fs.cssFilename}.css`),
     new webpack.HotModuleReplacementPlugin()
   ],
 
   module: {
     rules: [{
-      test: /\.scss$/,
-      use: ExtractTextPlugin.extract({
-        fallback: `style-loader`,
-        use: [{
-          loader: `css-loader`,
+      test: /\.(sa|sc|c)ss$/,
+      use: [
+        `style-loader`,
+        `css-loader`,
+        {
+          loader: `postcss-loader`,
           options: {
-            sourceMap: true
+            config: {
+              path: `./config/postcss.config.js`
+            }
           }
-        }, {
-          loader: `sass-loader`,
-          options: {
-            sourceMap: true
-          }
-        }]
-      })
-    }, {
-      test: /\.(jpg|jpeg|gif|png|svg|ttf|eot|woff|woff2)$/,
-      use: {
-        loader: `file-loader`,
-        options: {
-          useRelativePath: true,
-          name: `[name].[ext]`,
-          outputPath: `../`,
-        }
-      }
+        },
+        `sass-loader`,
+      ],
     }]
   }
 });

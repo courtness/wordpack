@@ -124,6 +124,8 @@ $screen-xl: 1920px;
   @return ((1 / $max) * $block-count) * 100vw;
 }
 
+$column-padding: 0;
+
 $columns: (
   12: 'col'
 );

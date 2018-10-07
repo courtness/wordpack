@@ -3,12 +3,12 @@
 // fonts
 
 $fonts : (
-  'font-name' : (
-    'bold',
-    'light',
-    'medium',
-    'regular'
-  )
+  // 'font-name' : (
+  //   'bold',
+  //   'light',
+  //   'medium',
+  //   'regular'
+  // )
 );
 
 @each $name, $weights in $fonts {
@@ -21,6 +21,8 @@ $fonts : (
     	font-style: normal;
     }
   }
+
+  // TODO : weight classes
 
   .#{$name} {
     font-family: str-capicamelize(str-replace($name, '-', ' '));

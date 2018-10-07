@@ -10,7 +10,7 @@ class VideoService {
     }
 
     if (videos.length === 1) {
-      videos = [ videos ];
+      videos = [ videos[0] ];
     }
 
     videos.forEach((video) => {

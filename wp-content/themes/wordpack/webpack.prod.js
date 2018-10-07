@@ -1,6 +1,7 @@
 const common = require(`./webpack.common.js`);
 const merge = require(`webpack-merge`);
 
+const HtmlWebpackPlugin = require(`html-webpack-plugin`);
 const MiniCssExtractPlugin = require(`mini-css-extract-plugin`);
 
 module.exports = merge(common, {
@@ -8,13 +9,27 @@ module.exports = merge(common, {
 
   output: {
     filename: `js/${common.externals.webpackConfig.fs.jsFilename}.[hash].js`,
-    chunkFilename: `js/[name].[chunkhash].js`,
+    chunkFilename: `js/[chunkhash].js`,
     publicPath: `/wp-content/themes/${common.externals.webpackConfig.wordpress.themeName}/dist/`
   },
 
   plugins: [
+    new HtmlWebpackPlugin({
+      chunks: `css`,
+      excludeChunks: `js`,
+      minify: {
+        collapseWhitespace: true,
+        preserveLineBreaks: true,
+        removeComments: true
+      },
+      inject: false,
+      hash: true,
+      template: `src/ejs/css.ejs`,
+      filename: `php/css.php`
+    }),
     new MiniCssExtractPlugin({
-      filename: `./css/${common.externals.webpackConfig.fs.cssFilename}.[hash].css`
+      filename: `css/${common.externals.webpackConfig.fs.cssFilename}.[hash].css`,
+      chunkFilename: `css/[name].[chunkhash].css`
     })
   ],
 
@@ -23,7 +38,6 @@ module.exports = merge(common, {
       test: /\.scss$/,
       exclude: /node_modules/,
       use: [
-        `style-loader`,
         MiniCssExtractPlugin.loader,
         `css-loader`,
         {
@@ -36,16 +50,6 @@ module.exports = merge(common, {
         },
         `sass-loader`
       ]
-    }, {
-      test: /\.(jpg|jpeg|gif|png|svg|ttf|eot|woff|woff2)$/,
-      use: {
-        loader: `file-loader`,
-        options: {
-          name: `[name].[ext]`,
-          outputPath: `./css/assets/`,
-          publicPath: `./assets/`
-        }
-      }
     }]
   }
 });
