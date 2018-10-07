@@ -8,7 +8,7 @@ export function capitalise(string) {
 }
 
 export function isDefined(obj) {
-  return typeof obj !== 'undefined' && obj != null;
+  return typeof obj !== `undefined` && obj != null;
 }
 
 export function isEmpty(obj) {

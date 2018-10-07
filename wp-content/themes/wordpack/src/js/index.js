@@ -7,7 +7,7 @@ import { wordpressAdminService } from "@/src/js/services/WordpressAdminService";
 
   document.addEventListener(`DOMContentLoaded`, () => {
     document.querySelectorAll(`[data-component]`).forEach((element) => {
-      import(/* webpackChunkName: "chunk-[request]" */ `./components/${element.getAttribute(`data-component`)}`);
+      import(/* webpackChunkName: "[request]" */ `./components/${element.getAttribute(`data-component`)}`);
     });
   });
 })(window);

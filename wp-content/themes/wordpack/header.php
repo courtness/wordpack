@@ -24,6 +24,10 @@
 
     <title><?php wp_title( '' ); ?></title>
 
+    <?php if ( ENVIRONMENT == 'production' ): ?>
+      <?php include( locate_template( 'dist/php/css.php' ) ); ?>
+    <?php endif; ?>
+
     <?php include( locate_template( 'partials/scripts/tracking-head.php' ) ); ?>
 
     <?php wp_head(); ?>
@@ -33,3 +37,4 @@
     <?php include( locate_template( 'partials/overlays/index.php' ) ); ?>
 
     <div id="wrap" class="relative">
+      <?php include( locate_template( 'partials/header.php' ) ); ?>

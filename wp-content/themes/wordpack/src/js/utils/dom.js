@@ -1,9 +1,8 @@
-
 //
 // data parsing
 
 export function isIterable(object) {
-  return typeof object[Symbol.iterator] === "function";
+  return typeof object[Symbol.iterator] === `function`;
 }
 
 export function domParse(object) {

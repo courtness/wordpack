@@ -8,7 +8,7 @@ My baseline WIP for new Wordpress projects using Webpack 4. Includes:
 - Browsersync proxy
 - Hot reloads
 - JS chunk/hash config, CSS post-processing
-- Wordpress chunk enqueues
+- Injectec EJS/PHP for source files
 
 Comprised only of the Wordpress `/wp-content/themes/wordpack` folder; requires all other Wordpress folders be extracted at the root dir (see below) and 'wordpack' as the theme name.
 
