@@ -4,14 +4,6 @@
 
 $colors: (
   black : #000000,
-  koamaru : #1c1794,
-  marzipan : #f7db95,
-  aqua : #84bfd8,
-  governor : #2F29B3,
-  crimson : #e32012,
-  dusty-gray : #9b9b9b,
-  oyster : #ebcaca,
-  gallery : #eeeeee,
   white : #ffffff
 );
 
@@ -28,22 +20,3 @@ $colors: (
   @warn "Unknown `#{$key}` in $colors.";
   @return null;
 }
-
-////////////
-
-// fonts
-
-
-////////////
-
-// grid
-
-$screen-sm: 768px;
-$screen-md: 1024px;
-$screen-lg: 1440px;
-$screen-xl: 1920px;
-
-$columns: 12;
-
-$header-padding : 121px;
-$header-padding-mobile : 64px;

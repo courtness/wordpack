@@ -100,15 +100,6 @@ export function addClass(nodes, className) {
   });
 }
 
-//
-// TODO : combine with addClass
-
-export function addClasses(nodes, classNames) {
-  for (let className of classNames) {
-    addClass(nodes, className);
-  }
-}
-
 export function removeClass(nodes, className) {
   if (className.startsWith(`.`)) {
     className = className.substring(1);
@@ -121,15 +112,6 @@ export function removeClass(nodes, className) {
   });
 }
 
-//
-// TODO : combine with removeClass
-
-export function removeClasses(nodes, classNames) {
-  for (let className of classNames) {
-    removeClass(nodes, className);
-  }
-}
-
 export function toggleClass(nodes, className) {
   if (className.startsWith(`.`)) {
     className = className.substring(1);
@@ -138,6 +120,24 @@ export function toggleClass(nodes, className) {
   domParse(nodes).forEach((element) => {
     element.classList.toggle(className);
   });
+}
+
+//
+// TODO : combine with addClass
+
+export function addClasses(nodes, classNames) {
+  for (let className of classNames) {
+    addClass(nodes, className);
+  }
+}
+
+//
+// TODO : combine with removeClass
+
+export function removeClasses(nodes, classNames) {
+  for (let className of classNames) {
+    removeClass(nodes, className);
+  }
 }
 
 export function findChildrenByClass(parent, className) {

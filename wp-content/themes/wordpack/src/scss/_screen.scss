@@ -2,19 +2,13 @@
 
 // screen
 
+$header-padding : 121px;
+$header-padding-mobile : 64px;
+
 $screen-sm: 768px;
 $screen-md: 1024px;
 $screen-lg: 1440px;
 $screen-xl: 1920px;
-
-$columns: 12;
-
-$header-padding : 121px;
-$header-padding-mobile : 64px;
-
-$columns: (
-  12: 'col'
-);
 
 // < 768px
 @mixin xs {
@@ -126,9 +120,13 @@ $columns: (
 
 // grid
 
-@function grid-blocks($count, $columns) {
-  @return ((1 / $columns) * $count) * 100vw;
+@function grid-blocks($block-count, $max) {
+  @return ((1 / $max) * $block-count) * 100vw;
 }
+
+$columns: (
+  12: 'col'
+);
 
 @each $length, $prefix in $columns {
   @for $i from 1 through $length {

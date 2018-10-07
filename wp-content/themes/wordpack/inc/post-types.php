@@ -6,10 +6,11 @@
  * @since Wordpack 0.1
  */
 
-function wordpack_init_post_types() {
+function init_post_types() {
   //
-  // products
+  // e.g. products
 
+  /*
   $product_labels = array(
     'name'               => 'Products',
     'singular_name'      => 'Product',
@@ -43,6 +44,7 @@ function wordpack_init_post_types() {
   );
 
   register_post_type( 'product', $product_args );
+  */
 }
 
-add_action( 'init', 'wordpack_init_post_types' );
+add_action( 'init', 'init_post_types' );

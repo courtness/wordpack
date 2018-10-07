@@ -3,14 +3,12 @@
 // fonts
 
 $fonts : (
-  'louize-display-trial' : (
+  'font-name' : (
     'bold',
+    'light',
+    'medium',
     'regular'
-  ),
-  'akzidenz-grotesk-bq' : (
-    'bold',
-    'regular'
-  ),
+  )
 );
 
 @each $name, $weights in $fonts {
@@ -32,74 +30,21 @@ $fonts : (
 //
 
 .h1 {
-  @include sm-xl {
-    font-size: 144px;
-    line-height: 144px;
-  }
 }
 
 .h2 {
-	font-size: 55px;
-	line-height: 50px;
-
-  @include sm-xl {
-    font-size: 60px;
-    line-height: 60px;
-  }
-
-	@media screen and (min-width: 1024px) and (max-width: 1280px) {
-		font-size: 48px;
-    line-height: 48px;
-	}
 }
 
 .h3 {
-	font-size: 36px;
-	line-height: 36px;
-
-  @include sm-xl {
-    font-size: 36px;
-    line-height: 36px;
-		// TODO : look into this
-		letter-spacing: 1px;
-  }
-}
-
-.h4 {
-	font-size: 22px;
-	line-height: 27px;
-
-  @include sm-xl {
-    // font-size: 36px;
-    // line-height: 36px;
-  }
 }
 
 //
 
 .b1 {
-	font-size: 14px;
-	line-height: 18px;
-
-  @include sm-xl {
-    font-size: 18px;
-    line-height: 24px;
-  }
 }
 
 .b2 {
-	font-size: 11px;
-	line-height: 15px;
-
-  @include sm-xl {
-    font-size: 14px;
-    line-height: 18px;
-  }
 }
 
 .b3 {
-  @include sm-xl {
-    font-size: 10px;
-    line-height: 11px;
-  }
 }

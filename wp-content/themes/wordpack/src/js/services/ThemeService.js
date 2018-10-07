@@ -4,7 +4,7 @@ import {
   addClass,
   hasClass,
   removeClass
-} from "./../utils/dom";
+} from "@/src/js/utils/dom.js";
 
 class ThemeService {
   constructor() {
@@ -16,19 +16,10 @@ class ThemeService {
       toggleableOverlays : query(`.data-overlay`)
     }
 
-    this._initialized = false;
-
     this.initialize();
   }
 
   initialize = () => {
-    if (this._initialized) {
-      console.warn(`ThemeService initializer`);
-      return;
-    }
-
-    this._initialized = true;
-
     this.addKeyboardListeners();
 
     this._template.overlayClosers.forEach((overlayCloser) => {

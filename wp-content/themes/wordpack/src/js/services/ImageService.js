@@ -1,4 +1,4 @@
-import { queryByAttribute } from "./../utils/dom";
+import { queryByAttribute } from "@/src/js/utils/dom.js";
 
 class ImageService {
   lazyLoad = (imageElements, timeout) => {

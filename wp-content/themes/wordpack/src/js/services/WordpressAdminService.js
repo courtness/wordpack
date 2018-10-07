@@ -1,5 +1,5 @@
-import { query } from "./../utils/dom";
-import { isEmpty } from "./../utils/helpers";
+import { query } from "@/src/js/utils/dom.js";
+import { isEmpty } from "@/src/js/utils/helpers.js";
 
 class WordpressAdminService {
   constructor() {
@@ -33,11 +33,11 @@ class WordpressAdminService {
 
       let request = {
         body : body,
-        credentials : "same-origin",
+        credentials : `same-origin`,
         headers : new Headers({
-          "Content-Type": "application/x-www-form-urlencoded; charset=utf-8"
+          "Content-Type": `application/x-www-form-urlencoded; charset=utf-8`
         }),
-        method : "POST"
+        method : `POST`
       }
 
       fetch(this._wpAjaxUrl, request)
@@ -55,6 +55,14 @@ class WordpressAdminService {
   //
   // helpers
 
+  fetchHandler = (response) => {
+    if (!response.ok) {
+      throw Error(response.status);
+    }
+
+    return response;
+  }
+
   validateRequest = (url, action) => {
     if (isEmpty(url) || isEmpty(action)) {
       return {
@@ -63,7 +71,9 @@ class WordpressAdminService {
       }
     }
 
-    return { valid: true }
+    return {
+      valid: true
+    };
   }
 
   validateRequestWithData = (url, action, data) => {
@@ -74,15 +84,9 @@ class WordpressAdminService {
       }
     }
 
-    return { valid: true }
-  }
-
-  fetchHandler = (response) => {
-    if (!response.ok) {
-      throw Error(response.status);
-    }
-
-    return response;
+    return {
+      valid: true
+    };
   }
 }
 

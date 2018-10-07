@@ -6,7 +6,6 @@
  * @since Wordpack 0.1
  */
 
-
 /**
  * If someone tries to log in with a banned username, immediately return a 403
  * Only spambots / bruteforce bots will try to use these usernames
@@ -14,7 +13,7 @@
  * @param string $username
  * @return void
  */
-function wordpack_check_for_banned_username( $username ) {
+function check_for_banned_username( $username ) {
   global $wpdb;
 
   $banned = array(
@@ -33,4 +32,4 @@ function wordpack_check_for_banned_username( $username ) {
     exit();
   }
 }
-add_action( 'wp_authenticate' , 'wordpack_check_for_banned_username' );
+add_action( 'wp_authenticate' , 'check_for_banned_username' );

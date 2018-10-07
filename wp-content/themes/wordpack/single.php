@@ -1,12 +1,13 @@
 <?php
-/**
- * The template for individual posts
- *
- * @package Wordpack
- * @since Wordpack 0.1
- */
+  /**
+   * The template for individual posts
+   *
+   * @package Wordpack
+   * @since Wordpack 0.1
+   */
 
-get_header() ?>
+  get_header();
+?>
 
   <?php while ( have_posts() ) : the_post() ?>
     <h1><?php the_title(); ?></h1>

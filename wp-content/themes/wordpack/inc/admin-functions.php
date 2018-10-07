@@ -2,8 +2,8 @@
 /**
  * WordPress Admin Functions
  *
- * @package Frank Darling
- * @since Frank Darling 0.1
+ * @package Wordpack
+ * @since Wordpack 0.1
  */
 
 //
@@ -20,7 +20,7 @@ add_filter( 'default_hidden_meta_boxes', 'hide_yoast' );
  * https://github.com/Yoast/wordpress-seo/issues/3464
  * https://wordpress.org/support/topic/please-remove-your-invasive-update-message
  */
-function remove_yeost_bloat() {
+function remove_yoast_bloat() {
   echo '<style>
     #wp-admin-bar-wpseo-menu,
     #misc-publishing-actions #content-score,
@@ -31,7 +31,7 @@ function remove_yeost_bloat() {
     }
   </style>';
 }
-add_action('admin_head', 'remove_yeost_bloat');
+add_action('admin_head', 'remove_yoast_bloat');
 
 add_filter( 'wpseo_stopwords', '__return_empty_array' );
 

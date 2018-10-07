@@ -1,22 +1,8 @@
-import { documentService } from "@/src/js/services/DocumentService";
 import { eventService } from "@/src/js/services/EventService";
-import { query } from "@/src/js/utils/dom.js";
 import { getAbsolutePosition, inViewport } from "@/src/js/utils/screen";
 
 class VideoService {
-  constructor() {
-    this._initialized = false;
-
-    this.initialize();
-  }
-
-  initialize = () => {
-    if (this._initialized) {
-      return;
-    }
-
-    this._initialized = true;
-  }
+  constructor() {}
 
   setPlaybackListeners = (videos) => {
     if (!videos || videos.length === 0) {
