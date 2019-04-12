@@ -7,8 +7,7 @@ export default class Home extends WordpressTemplate {
     super();
 
     this._template = {
-      root : query(`#template-root`),
-      stickyMessages : query(`.stickymessages`),
+      root : query(`#template-root`)
     };
 
     this.initialize();
@@ -20,8 +19,7 @@ export default class Home extends WordpressTemplate {
 
   addScrollListeners = () => {
     eventService.on(`scroll`, (scrollData) => {
-      const scrollTop = scrollData.scrollTop;
-      console.log(scrollTop);
+      // const scrollTop = scrollData.scrollTop;
     });
   }
 }
