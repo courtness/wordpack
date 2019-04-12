@@ -1,13 +1,11 @@
-import { query } from "@/src/js/utils/dom.js";
-import { isEmpty } from "@/src/js/utils/helpers.js";
+import { query } from "@/src/js/utils/dom";
+import { isEmpty } from "@/src/js/utils/helpers";
 
 class WordpressAdminService {
   constructor() {
     this._wpAdminUrl;
     this._wpAjaxUrl;
   }
-
-  //
 
   initialize = () => {
     let wpUrl = query(`#wp-url`)[0];
@@ -55,14 +53,6 @@ class WordpressAdminService {
   //
   // helpers
 
-  fetchHandler = (response) => {
-    if (!response.ok) {
-      throw Error(response.status);
-    }
-
-    return response;
-  }
-
   validateRequest = (url, action) => {
     if (isEmpty(url) || isEmpty(action)) {
       return {
@@ -71,9 +61,7 @@ class WordpressAdminService {
       }
     }
 
-    return {
-      valid: true
-    };
+    return { valid: true }
   }
 
   validateRequestWithData = (url, action, data) => {
@@ -84,9 +72,15 @@ class WordpressAdminService {
       }
     }
 
-    return {
-      valid: true
-    };
+    return { valid: true }
+  }
+
+  fetchHandler = (response) => {
+    if (!response.ok) {
+      throw Error(response.status);
+    }
+
+    return response;
   }
 }
 

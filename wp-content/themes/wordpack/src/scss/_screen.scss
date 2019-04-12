@@ -1,117 +1,40 @@
 ////////////
 
-// screen
+// breakpoints
 
-$header-padding : 121px;
-$header-padding-mobile : 64px;
+$breakpoints: (
+  xl: 1920px,
+  lg: 1440px,
+  md: 1024px,
+  sm: 768px
+);
 
-$screen-sm: 768px;
-$screen-md: 1024px;
-$screen-lg: 1440px;
-$screen-xl: 1920px;
-
-// < 768px
-@mixin xs {
-  @media screen and (max-width: $screen-sm - 1) {
-    @content;
-  }
-}
-
-// < 1024px;
-@mixin xs-sm {
-  @media screen and (max-width: $screen-md - 1) {
-    @content;
-  }
-}
-
-// < 1440px;
-@mixin xs-md {
-  @media screen and (max-width: $screen-lg - 1) {
-    @content;
-  }
-}
-
-// < 1920px;
-@mixin xs-md {
-  @media screen and (max-width: $screen-xl - 1) {
-    @content;
-  }
-}
-
-// 768px - 1023px
-@mixin sm {
-  @media screen and (min-width: $screen-sm) and (max-width: $screen-md - 1) {
-    @content;
-  }
-}
-
-// 768px - 1439px;
-@mixin sm-md {
-  @media screen and (min-width: $screen-sm) and (max-width: $screen-lg - 1) {
-    @content;
-  }
-}
-
-// 768px - 1919px;
-@mixin sm-lg {
-  @media screen and (min-width: $screen-sm) and (max-width: $screen-xl - 1) {
-    @content;
-  }
-}
-
-// >= 768px
-@mixin sm-xl {
-  @media screen and (min-width: $screen-sm) {
-    @content;
-  }
-}
-
-// 1024px - 1439px
-@mixin md {
-  @media screen and (min-width: $screen-md) and (max-width: $screen-lg - 1) {
-    @content;
-  }
-}
-
-// 1024px - 1919px
-@mixin md-lg {
-  @media screen and (min-width: $screen-md) and (max-width: $screen-xl - 1) {
-    @content;
-  }
-}
-
-// >= 1024px
-@mixin md-xl {
-  @media screen and (min-width: $screen-md) {
-    @content;
-  }
-}
-
-// 1440px - 1919px
-@mixin lg {
-  @media screen and (min-width: $screen-lg) and (max-width: $screen-xl - 1) {
-    @content;
-  }
-}
-
-// >= 1440px
-@mixin lg-xl {
-  @media screen and (min-width: $screen-lg) {
-    @content;
-  }
-}
-
-// >= 1920px
 @mixin xl {
-  @media screen and (min-width: $screen-xl) {
+  @media screen and (min-width: map-get($breakpoints, 'xl')) {
     @content;
   }
 }
 
-@mixin high-dpi {
-  @media
-  (-webkit-min-device-pixel-ratio: 1.5),
-  (min-resolution: 144dpi) {
+@mixin lg {
+  @media screen and (max-width: map-get($breakpoints, 'xl') - 1) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media screen and (max-width: map-get($breakpoints, 'lg') - 1) {
+    @content;
+  }
+}
+
+@mixin sm {
+  @media screen and (max-width: map-get($breakpoints, 'md') - 1) {
+    @content;
+  }
+}
+
+@mixin xs {
+  @media screen and (max-width: map-get($breakpoints, 'sm') - 1) {
     @content;
   }
 }
@@ -120,40 +43,88 @@ $screen-xl: 1920px;
 
 // grid
 
-@function grid-blocks($block-count, $max) {
-  @return ((1 / $max) * $block-count) * 100vw;
-}
-
-$column-padding: 0;
-
-$columns: (
-  12: 'col'
+$grid_columns: 12;
+$grid_gutter: 8px;
+$grid_padding: (
+  xl: 48px,
+  lg: 48px,
+  md: 48px,
+  sm: 52px,
+  xs: 26px
 );
 
-@each $length, $prefix in $columns {
-  @for $i from 1 through $length {
-    $width: grid-blocks($i, $length);
+.grid {
+  @include xl {
+    width: calc(100% - (#{map-get($grid_padding, 'xl')} * 2));
+  }
 
-    .#{$prefix}-#{$i} { width: $width; }
+  @include lg {
+    width: calc(100% - (#{map-get($grid_padding, 'lg')} * 2));
+  }
 
-    @include xs {
-      .#{$prefix}-xs-#{$i} { width: $width; }
+  @include md {
+    width: calc(100% - (#{map-get($grid_padding, 'md')} * 2));
+  }
+
+  @include sm {
+    width: calc(100% - (#{map-get($grid_padding, 'sm')} * 2));
+  }
+
+  @include xs {
+    width: calc(100% - (#{map-get($grid_padding, 'xs')} * 2));
+  }
+
+  position: relative;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat($grid_columns, minmax(0, 1fr));
+  grid-gap: $grid_gutter / 2 $grid_gutter;
+}
+
+[class*=grid__] {
+  grid-column-end: span $grid_columns;
+}
+
+@mixin generate-classes($columns: $grid_columns, $breakpoint_key: '') {
+  $breakpoint_suffix: '';
+
+  @if $breakpoint_key != '' {
+    $breakpoint_suffix: $breakpoint_key + '-';
+  }
+
+  @for $i from 1 through $columns {
+    .grid__columns--#{$breakpoint_suffix}#{$i} {
+      grid-column-end: span $i;
     }
 
-    @include sm {
-      .#{$prefix}-sm-#{$i} { width: $width; }
+    .grid__row--#{$breakpoint_suffix}#{$i} {
+      grid-row: $i;
     }
-
-    @include sm-xl {
-      .#{$prefix}-smxl-#{$i} { width: $width; }
-    }
-
-    @include md {
-      .#{$prefix}-md-#{$i} { width: $width; }
-    }
-
-    @include md-xl {
-      .#{$prefix}-mdxl-#{$i} { width: $width; }
+    
+    .grid__start--#{$breakpoint_suffix}#{$i} {
+      grid-column-start: $i;
     }
   }
+}
+
+@include generate-classes($grid_columns);
+
+@include xl {
+  @include generate-classes($grid_columns, 'xl');
+}
+
+@include lg {
+  @include generate-classes($grid_columns, 'lg');
+}
+
+@include md {
+  @include generate-classes($grid_columns, 'md');
+}
+
+@include sm {
+  @include generate-classes($grid_columns, 'sm');
+}
+
+@include xs {
+  @include generate-classes($grid_columns, 'xs');
 }

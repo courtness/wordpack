@@ -1,9 +1,12 @@
+import { themeService } from "@/src/js/services/ThemeService";
 import { wordpressAdminService } from "@/src/js/services/WordpressAdminService";
 
-(global => {
+(() => {
   window.baseURL = document.getElementById(`wp-url`).getAttribute(`data-baseurl`);
 
   wordpressAdminService.initialize();
+  
+  themeService.initialize();
 
   document.addEventListener(`DOMContentLoaded`, () => {
     document.querySelectorAll(`[data-component]`).forEach((element) => {

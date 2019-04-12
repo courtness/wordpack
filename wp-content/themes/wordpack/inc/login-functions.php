@@ -3,7 +3,7 @@
  * Functions related to user login
  *
  * @package Wordpack
- * @since Wordpack 0.1
+ * @since Wordpack 1.0
  */
 
 /**

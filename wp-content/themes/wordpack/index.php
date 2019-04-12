@@ -9,14 +9,14 @@
  *
  * Learn more: http://codex.wordpress.org/Template_Hierarchy
  *
- * @package wordpack
- * @since wordpack 0.1
+ * @package Wordpack
+ * @since Wordpack 1.0
  */
 
-get_header() ?>
+get_header(); ?>
 
-<?php while ( have_posts() ) : the_post() ?>
+  <?php while ( have_posts() ) : the_post() ?>
 
-<?php endwhile ?>
+  <?php endwhile ?>
 
-<?php get_footer() ?>
+<?php get_footer(); ?>

@@ -1,9 +1,35 @@
-import { queryByAttribute } from "@/src/js/utils/dom.js";
+import { isIterable } from "@/src/js/utils/dom";
 
 class ImageService {
+  constructor() {
+    this._preloadedImages = [];
+  }
+
+  //
+
+  preloadFromUrl = (url) => {
+    let img = new Image();
+
+    img.onload = () => {
+      const index = this._preloadedImages.indexOf(this);
+
+      if (index !== -1) {
+        this._preloadedImages.splice(index, 1);
+      }
+    }
+
+    this._preloadedImages.push(img);
+
+    img.src = url;
+  }
+
   lazyLoad = (imageElements, timeout) => {
     if (!imageElements) {
       return;
+    }
+
+    if (!isIterable(imageElements)) {
+      imageElements = [ imageElements ];
     }
 
     if (!timeout) {

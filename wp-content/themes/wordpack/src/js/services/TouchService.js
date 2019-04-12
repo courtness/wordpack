@@ -11,7 +11,7 @@ export default class TouchService {
 
   //
 
-  addTouchHandlersForElement = (element, id) => {
+  addTouchHandlersForElement = (element) => {
     element.addEventListener(`touchstart`, this.touchStartHandler, false);
     element.addEventListener(`touchmove`, this.touchMoveHandler, false);
   }
@@ -30,6 +30,12 @@ export default class TouchService {
       return;
     }
 
+    let emitId = e.currentTarget.emitId;
+
+    if (!emitId) {
+      emitId = ``;
+    }
+
     const xUp = e.touches[0].clientX;
     const yUp = e.touches[0].clientY;
     const xDiff = this.state.xDown - xUp;
@@ -37,16 +43,16 @@ export default class TouchService {
 
     if (Math.abs(xDiff) > Math.abs(yDiff)) {
       if (xDiff > 0) {
-        eventService.emitDataByKey(`swipeLeft`, e);
+        eventService.emitDataByKey(`swipeLeft${emitId}`, e);
       } else {
-        eventService.emitDataByKey(`swipeRight`, e);
+        eventService.emitDataByKey(`swipeRight${emitId}`, e);
       }
 
     } else {
       if (yDiff > 0) {
-        eventService.emitDataByKey(`swipeUp`, e);
+        eventService.emitDataByKey(`swipeUp${emitId}`, e);
       } else {
-        eventService.emitDataByKey(`swipeDown`, e);
+        eventService.emitDataByKey(`swipeDown${emitId}`, e);
       }
     }
 

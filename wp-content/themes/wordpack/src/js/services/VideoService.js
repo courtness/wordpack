@@ -1,8 +1,17 @@
-import { eventService } from "@/src/js/services/EventService";
-import { getAbsolutePosition, inViewport } from "@/src/js/utils/screen";
+import { documentService } from "@/src/js/services/DocumentService"
+import { eventService } from "@/src/js/services/EventService"
+import { getAbsolutePosition } from "@/src/js/utils/screen"
 
 class VideoService {
-  constructor() {}
+  constructor() {
+    this._videos = [];
+
+    this.initialize();
+  }
+
+  initialize = () => {
+    //
+  }
 
   setPlaybackListeners = (videos) => {
     if (!videos || videos.length === 0) {
@@ -14,23 +23,39 @@ class VideoService {
     }
 
     videos.forEach((video) => {
-      video[0].onplaying = function() {
+      video.onplaying = () => {
         video.playing = true;
       }
 
-      video[0].onpause = function() {
+      video.onpause = () => {
         video.playing = false;
       }
-    });
 
+      this._videos.push(video);
+    });
+  }
+
+  addScrollListener = () => {
     eventService.on(`scroll`, (scrollData) => {
-      videos.forEach((video) => {
-        if (!inViewport(video[0], scrollData.scrollTop)) {
-          video[0].pause();
-        } else {
-          video[0].play();
+      this.scrollHandler(scrollData);
+    });
+  }
+
+  //
+
+  scrollHandler = (scrollData) => {
+    this._videos.forEach((video) => {
+      const videoOffsetTop = getAbsolutePosition(video).top;
+
+      if (scrollData.scrollTop > (videoOffsetTop - documentService.state.windowHeight) &&
+          scrollData.scrollTop < videoOffsetTop + video.clientHeight) {
+        if (!video.playing) {
+          video.play();
         }
-      });
+
+      } else if (video.playing) {
+        video.pause();
+      }
     });
   }
 }

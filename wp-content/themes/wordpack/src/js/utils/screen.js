@@ -49,8 +49,22 @@ export function getDevice() {
   }
 }
 
+export function isJumbo() {
+  return getWindowWidth() > 1440;
+}
+
 export function getTouchEvent(e) {
   return e.changedTouches ? e.changedTouches[0] : e;
+}
+
+export function getDocumentHeight() {
+  return Math.max(
+    document.body.scrollHeight,
+    document.body.offsetHeight, 
+    document.documentElement.clientHeight,
+    document.documentElement.scrollHeight,
+    document.documentElement.offsetHeight
+  );
 }
 
 export function getWindowHeight() {
@@ -67,6 +81,22 @@ export function inViewport(element, scrollTop) {
     scrollTop < getAbsolutePosition(element).top + element.clientHeight
   );
 }
+
+export function getPosition(element) {
+  let xPosition = 0;
+  let yPosition = 0;
+
+  while (element) {
+    xPosition += (element.offsetLeft - element.scrollLeft + element.clientLeft);
+    yPosition += element.offsetTop;
+    element = element.offsetParent;
+  }
+
+	return {
+    x: xPosition,
+    y: yPosition
+  };
+};
 
 export function isDesktop() {
   return window.matchMedia(`(min-width: ${tabletWidth + 1}px)`).matches;

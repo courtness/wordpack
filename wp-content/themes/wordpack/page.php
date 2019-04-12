@@ -3,7 +3,7 @@
    * The template for individual pages
    *
    * @package Wordpack
-   * @since Wordpack 0.1
+   * @since Wordpack 1.0
    */
 
   get_header();

@@ -3,7 +3,7 @@
  * Helper functions to be used in templates
  *
  * @package Wordpack
- * @since Wordpack 0.1
+ * @since Wordpack 1.0
  */
 
 /**

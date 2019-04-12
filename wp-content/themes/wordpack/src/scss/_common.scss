@@ -258,6 +258,15 @@
   }
 }
 
+.clipped {
+  clip: rect(auto, auto, auto, auto);
+  // clip-path: inset(0 0 0 0);
+}
+
+.whitespace-nowrap {
+  white-space: nowrap;
+}
+
 .invert-x {
   transform: scaleX(-1);
 }

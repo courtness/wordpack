@@ -1,5 +1,5 @@
 {
-  "name": "Wordpack",
+  "name": "wordpack",
   "version": "1.0.0",
   "description": "Wordpress/Webpack 4 Boilerplate",
   "main": "index.js",
@@ -52,5 +52,9 @@
         }
       ]
     ]
+  },
+  "dependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.16.0"
   }
 }

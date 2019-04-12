@@ -3,7 +3,7 @@
  * Custom Post Type Routing
  *
  * @package Wordpack
- * @since Wordpack 0.1
+ * @since Wordpack 1.0
  */
 
 add_theme_support( 'post-thumbnails' );
@@ -46,7 +46,29 @@ function init_post_types() {
   );
 
   register_post_type( 'product', $product_args );
+
+  //
+  // e.g. parent/child URL rewrites
+
+  add_rewrite_rule(
+    'parent/(.*)/(.*)',
+    'index.php?post_type=child&name=$matches[2]',
+    'top'
+  );
   */
 }
 
 add_action( 'init', 'init_post_types' );
+
+//
+// e.g. parent/child URL rewrites
+
+// function link_child_posts( $link, $post ) {
+//   if ( get_post_type( $post ) === 'child' ) {
+//     $territory = get_post( get_field( 'parent', $post->ID )[0] );
+//     $link = str_replace( '%parent%', seoify( $parent->post_title ), $link );
+//   }
+
+//   return $link;
+// }
+// add_filter( 'post_type_link', 'link_child_posts', 10, 2);

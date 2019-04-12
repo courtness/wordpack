@@ -3,7 +3,7 @@
  * WordPress Admin Functions
  *
  * @package Wordpack
- * @since Wordpack 0.1
+ * @since Wordpack 1.0
  */
 
 //
@@ -16,7 +16,7 @@ function hide_yoast( $hidden ) {
 add_filter( 'default_hidden_meta_boxes', 'hide_yoast' );
 
 /**
- * Remove Yoast blod
+ * Remove Yoast bloat
  * https://github.com/Yoast/wordpress-seo/issues/3464
  * https://wordpress.org/support/topic/please-remove-your-invasive-update-message
  */

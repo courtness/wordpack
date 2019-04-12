@@ -3,7 +3,7 @@
  * Wordpack functions and definitions.
  *
  * @package Wordpack
- * @since TSS 0.1
+ * @since Wordpack 1.0
  */
 
 require_once __DIR__ . '/inc/admin-api.php';

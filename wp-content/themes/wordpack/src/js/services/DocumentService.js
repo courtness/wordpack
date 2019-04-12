@@ -1,11 +1,12 @@
 import { eventService } from "@/src/js/services/EventService";
-import { getDevice, getWindowWidth } from "@/src/js/utils/screen";
+import { getDevice, getWindowWidth, isJumbo } from "@/src/js/utils/screen";
 
 export default class DocumentService {
   constructor() {
 
     this.state = {
       device: getDevice(),
+      jumbo : false,
       scrolling: false,
       scrollingDown: false,
       scrollTop: 0,
@@ -23,16 +24,21 @@ export default class DocumentService {
     window.addEventListener(`resize`, this.windowResizeHandler, false);
   }
 
-  windowResizeHandler = (e) => {
+  windowResizeHandler = () => {
     this.state.windowWidth = getWindowWidth();
     this.state.windowHeight = document.documentElement.clientHeight;
 
     let oldDevice = this.state.device;
+    let oldJumbo = this.state.jumbo;
 
     this.state.device = getDevice();
-
     if (oldDevice !== this.state.device) {
       eventService.emitDataByKey(`device`, this.state.device);
+    }
+
+    this.state.jumbo = isJumbo();
+    if (oldJumbo !== this.state.jumbo) {
+      eventService.emitDataByKey(`jumbo`, this.state.jumbo);
     }
 
     eventService.emitDataByKey(`resize`, {

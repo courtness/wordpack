@@ -1,16 +1,28 @@
+import WordpressTemplate from "@/src/js/modules/WordpressTemplate";
 import { query } from "@/src/js/utils/dom.js";
+import { eventService } from "@/src/js/services/EventService";
 
-export default class Home {
+export default class Home extends WordpressTemplate {
   constructor() {
+    super();
+
     this._template = {
-      root : query(`#template-root`)
+      root : query(`#template-root`),
+      stickyMessages : query(`.stickymessages`),
     };
 
     this.initialize();
   }
 
   initialize = () => {
-    console.log(`Home`);
+    this.addScrollListeners();
+  }
+
+  addScrollListeners = () => {
+    eventService.on(`scroll`, (scrollData) => {
+      const scrollTop = scrollData.scrollTop;
+      console.log(scrollTop);
+    });
   }
 }
 
