@@ -5,36 +5,42 @@
 $breakpoints: (
   xl: 1920px,
   lg: 1440px,
-  md: 1024px,
+  md: 1025px,
   sm: 768px
 );
 
 @mixin xl {
-  @media screen and (min-width: map-get($breakpoints, 'xl')) {
+  @media screen and (min-width: map-get($breakpoints, "xl")) {
     @content;
   }
 }
 
 @mixin lg {
-  @media screen and (max-width: map-get($breakpoints, 'xl') - 1) {
+  @media screen and (max-width: map-get($breakpoints, "xl") - 1) {
     @content;
   }
 }
 
 @mixin md {
-  @media screen and (max-width: map-get($breakpoints, 'lg') - 1) {
+  @media screen and (max-width: map-get($breakpoints, "lg") - 1) {
     @content;
   }
 }
 
 @mixin sm {
-  @media screen and (max-width: map-get($breakpoints, 'md') - 1) {
+  @media screen and (max-width: map-get($breakpoints, "md") - 1) {
     @content;
   }
 }
 
 @mixin xs {
-  @media screen and (max-width: map-get($breakpoints, 'sm') - 1) {
+  @media screen and (max-width: map-get($breakpoints, "sm") - 1) {
+    @content;
+  }
+}
+
+@mixin internet-explorer {
+  @media all and (-ms-high-contrast: none) {
     @content;
   }
 }
@@ -46,85 +52,158 @@ $breakpoints: (
 $grid_columns: 12;
 $grid_gutter: 8px;
 $grid_padding: (
-  xl: 48px,
-  lg: 48px,
-  md: 48px,
-  sm: 52px,
-  xs: 26px
+  xl: 76px,
+  lg: 76px,
+  md: 12px,
+  sm: 16px,
+  xs: 16px
 );
+
+.wrap {
+  overflow-x: hidden;
+}
 
 .grid {
   @include xl {
-    width: calc(100% - (#{map-get($grid_padding, 'xl')} * 2));
+    width: calc(100% - (#{map-get($grid_padding, "xl")} * 2));
   }
 
   @include lg {
-    width: calc(100% - (#{map-get($grid_padding, 'lg')} * 2));
+    width: calc(100% - (#{map-get($grid_padding, "lg")} * 2));
   }
 
   @include md {
-    width: calc(100% - (#{map-get($grid_padding, 'md')} * 2));
+    width: calc(100% - (#{map-get($grid_padding, "md")} * 2));
   }
 
   @include sm {
-    width: calc(100% - (#{map-get($grid_padding, 'sm')} * 2));
+    width: calc(100% - (#{map-get($grid_padding, "sm")} * 2));
   }
 
   @include xs {
-    width: calc(100% - (#{map-get($grid_padding, 'xs')} * 2));
+    width: calc(100% - (#{map-get($grid_padding, "xs")} * 2));
+  }
+
+  @supports (display: grid) {
+    display: grid;
+    grid-template-columns: repeat($grid_columns, minmax(0, 1fr));
+    grid-gap: $grid_gutter / 2 $grid_gutter;
   }
 
   position: relative;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat($grid_columns, minmax(0, 1fr));
-  grid-gap: $grid_gutter / 2 $grid_gutter;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: stretch;
+
+  &--nogap {
+    grid-gap: 0;
+  }
 }
 
-[class*=grid__] {
-  grid-column-end: span $grid_columns;
+[class*="grid__"] {
+  @supports (display: grid) {
+    grid-column-end: span $grid_columns;
+  }
 }
 
-@mixin generate-classes($columns: $grid_columns, $breakpoint_key: '') {
-  $breakpoint_suffix: '';
+@mixin generate-classes($columns: $grid_columns, $breakpoint_key: "") {
+  $breakpoint_suffix: "";
 
-  @if $breakpoint_key != '' {
-    $breakpoint_suffix: $breakpoint_key + '-';
+  @if $breakpoint_key != "" {
+    $breakpoint_suffix: $breakpoint_key + "-";
   }
 
   @for $i from 1 through $columns {
     .grid__columns--#{$breakpoint_suffix}#{$i} {
-      grid-column-end: span $i;
+      @supports (display: grid) {
+        width: 100%;
+        grid-column-end: span $i;
+      }
+
+      width: calc(100% / 12 * #{$i});
     }
 
-    .grid__row--#{$breakpoint_suffix}#{$i} {
-      grid-row: $i;
-    }
-    
     .grid__start--#{$breakpoint_suffix}#{$i} {
-      grid-column-start: $i;
+      @supports (display: grid) {
+        margin: 0 auto;
+        grid-column-start: $i;
+      }
+
+      margin-left: calc(100% / 12 * #{$i - 1});
     }
+  }
+}
+
+.no-margin--legacy {
+  @include internet-explorer {
+    margin-left: 0 !important;
+  }
+
+  @supports not (display: grid) {
+    margin-left: 0 !important;
   }
 }
 
 @include generate-classes($grid_columns);
 
 @include xl {
-  @include generate-classes($grid_columns, 'xl');
+  @include generate-classes($grid_columns, "xl");
 }
 
 @include lg {
-  @include generate-classes($grid_columns, 'lg');
+  @include generate-classes($grid_columns, "lg");
 }
 
 @include md {
-  @include generate-classes($grid_columns, 'md');
+  @include generate-classes($grid_columns, "md");
 }
 
 @include sm {
-  @include generate-classes($grid_columns, 'sm');
+  @include generate-classes($grid_columns, "sm");
 }
 
 @include xs {
-  @include generate-classes($grid_columns, 'xs');
+  @include generate-classes($grid_columns, "xs");
+}
+
+@function grid-column-width($count) {
+  $column-width: 100vw;
+
+  @if screen and (min-width: map-get($breakpoints, "xl")) {
+    $column-width: calc(
+      (((100vw - #{map-get($grid_padding, "xl")}) / 12) * #{$count}) -
+        calc((#{$grid_gutter} * 2) * #{$count})
+    );
+  }
+
+  @if screen and (max-width: map-get($breakpoints, "xl") - 1) {
+    $column-width: calc(
+      (((100vw - #{map-get($grid_padding, "lg")}) / 12) * #{$count}) -
+        calc((#{$grid_gutter} * 2) * #{$count})
+    );
+  }
+
+  @if screen and (max-width: map-get($breakpoints, "lg") - 1) {
+    $column-width: calc(
+      (((100vw - #{map-get($grid_padding, "md")}) / 12) * #{$count}) -
+        calc((#{$grid_gutter} * 2) * #{$count})
+    );
+  }
+
+  @if screen and (max-width: map-get($breakpoints, "md") - 1) {
+    $column-width: calc(
+      (((100vw - #{map-get($grid_padding, "sm")}) / 12) * #{$count}) -
+        calc((#{$grid_gutter} * 2) * #{$count})
+    );
+  }
+
+  @if screen and (max-width: map-get($breakpoints, "sm") - 1) {
+    $column-width: calc(
+      (((100vw - #{map-get($grid_padding, "xs")}) / 12) * #{$count}) -
+        calc((#{$grid_gutter} * 2) * #{$count})
+    );
+  }
+
+  @return $column-width;
 }
