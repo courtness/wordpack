@@ -9,8 +9,8 @@
   get_header();
 ?>
 
-  <div id="template-root" class="home" data-component="Home">
+  <main id="template-root" class="home" data-component="Home">
     <h1>home</h1>
-  </div>
+  </main>
 
 <?php get_footer(); ?>

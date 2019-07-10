@@ -286,28 +286,7 @@
 .transform-center {
   left: 50%;
   top: 50%;
-  transform: translate3d(-50%,-50%,0);
-}
-
-
-////////////
-
-// devices
-
-.hidden {
-  &--xs {
-    @include xs {
-      display: none;
-    }
-  }
-}
-
-.visible {
-  &--xs {
-    @include sm-xl {
-      display: none;
-    }
-  }
+  transform: translate3d(-50%, -50%, 0);
 }
 
 ////////////
@@ -337,12 +316,12 @@
 .fadeable-translator {
   transition: $default-transition opacity, $default-transition transform;
 
-  transform: translate3d(0,6px,0);
+  transform: translate3d(0, 6px, 0);
   opacity: 0;
   pointer-events: none;
 
   &.active {
-    transform: translate3d(0,0,0);
+    transform: translate3d(0, 0, 0);
     opacity: 1;
     pointer-events: auto;
   }
@@ -356,19 +335,19 @@
   }
 
   &--up {
-    transform: translate3d(0,6px,0);
+    transform: translate3d(0, 6px, 0);
   }
 
   &--down {
-    transform: translate3d(0,-6px,0);
+    transform: translate3d(0, -6px, 0);
   }
 
   &--left {
-    transform: translate3d(6px,0,0);
+    transform: translate3d(6px, 0, 0);
   }
 
   &--right {
-    transform: translate3d(-6px,0,0);
+    transform: translate3d(-6px, 0, 0);
   }
 }
 
@@ -393,7 +372,6 @@
     transition: $slow-transition opacity, $slow-transition transform;
   }
 }
-
 
 ////////////
 
