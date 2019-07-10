@@ -39,8 +39,23 @@ $breakpoints: (
   }
 }
 
-@mixin internet-explorer {
+@mixin ms-ie {
   @media all and (-ms-high-contrast: none) {
+    @content;
+  }
+}
+
+@mixin ms-edge() {
+  @supports (-ms-ime-align: auto) {
+    @content;
+  }
+}
+
+@mixin ms-all() {
+  @include ms-ie() {
+    @content;
+  }
+  @include ms-edge() {
     @content;
   }
 }
