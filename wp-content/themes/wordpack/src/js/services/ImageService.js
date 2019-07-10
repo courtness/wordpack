@@ -1,7 +1,7 @@
-import { eventService } from "@/src/js/services/EventService";
-import { addClass, query } from "@/src/js/utils/dom";
-import { isIterable } from "@/src/js/utils/dom";
-import { isDesktop } from "@/src/js/utils/screen";
+import { eventService } from "~/src/js/services/EventService";
+import { addClass, query } from "~/src/js/utils/dom";
+import { isIterable } from "~/src/js/utils/dom";
+import { isDesktop } from "~/src/js/utils/screen";
 
 class ImageService {
   constructor() {

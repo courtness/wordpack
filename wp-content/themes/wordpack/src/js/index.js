@@ -1,5 +1,6 @@
-import { themeService } from "@/src/js/services/ThemeService";
-import { wordpressAdminService } from "@/src/js/services/WordpressAdminService";
+import { themeService } from "~/src/js/services/ThemeService";
+import { wordpressAdminService } from "~/src/js/services/WordpressAdminService";
+import { ieDetector } from "~/src/js/utils/screen";
 
 (() => {
   window.baseURL = document.getElementById(`wp-url`).getAttribute(`data-baseurl`);

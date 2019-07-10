@@ -1,6 +1,6 @@
-import { documentService } from "@/src/js/services/DocumentService"
-import { eventService } from "@/src/js/services/EventService"
-import { getAbsolutePosition } from "@/src/js/utils/screen"
+import { documentService } from "~/src/js/services/DocumentService"
+import { eventService } from "~/src/js/services/EventService"
+import { getAbsolutePosition } from "~/src/js/utils/screen"
 
 class VideoService {
   constructor() {

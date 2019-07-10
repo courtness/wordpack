@@ -10,6 +10,10 @@
   },
   "author": "Dan Courtness",
   "license": "ISC",
+  "dependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.16.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.1.2",
     "@babel/plugin-proposal-class-properties": "^7.1.0",
@@ -40,7 +44,17 @@
   },
   "babel": {
     "presets": [
-      "@babel/preset-env"
+      [
+        "@babel/preset-env",
+        {
+          "useBuiltIns": "entry",
+          "corejs": 3,
+          "targets": {
+            "esmodules": true,
+            "ie": "11"
+          }
+        }
+      ]
     ],
     "plugins": [
       "@babel/plugin-proposal-class-properties",
@@ -48,13 +62,9 @@
       [
         "babel-plugin-root-import",
         {
-          "rootPathPrefix": "@"
+          "rootPathPrefix": "~"
         }
       ]
     ]
-  },
-  "dependencies": {
-    "babel-eslint": "^10.0.1",
-    "eslint": "^5.16.0"
   }
 }

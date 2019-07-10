@@ -1,4 +1,4 @@
-import { documentService } from "@/src/js/services/DocumentService";
+import { documentService } from "~/src/js/services/DocumentService";
 
 export default class WordpressTemplate {
   constructor() {

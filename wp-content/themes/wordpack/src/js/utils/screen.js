@@ -21,7 +21,6 @@ export function ieDetector() {
     return parseInt(ua.substring(edge + 5, ua.indexOf(`.`, edge)), 10);
   }
 
-  // other browser
   return false;
 }
 

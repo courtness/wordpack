@@ -1,4 +1,4 @@
-import { query } from "@/src/js/utils/dom.js";
+import { query } from "~/src/js/utils/dom.js";
 
 export default class Home {
   constructor() {

@@ -4,7 +4,7 @@ import {
   addClass,
   hasClass,
   removeClass
-} from "@/src/js/utils/dom.js";
+} from "~/src/js/utils/dom.js";
 
 class ThemeService {
   constructor() {

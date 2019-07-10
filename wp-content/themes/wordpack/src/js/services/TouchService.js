@@ -1,5 +1,5 @@
-import { eventService } from "@/src/js/services/EventService";
-import { isDesktop, getTouchEvent } from "@/src/js/utils/screen.js";
+import { eventService } from "~/src/js/services/EventService";
+import { isDesktop, getTouchEvent } from "~/src/js/utils/screen.js";
 
 export default class TouchService {
   constructor() {

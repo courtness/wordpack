@@ -1,6 +1,6 @@
-import WordpressTemplate from "@/src/js/modules/WordpressTemplate";
-import { query } from "@/src/js/utils/dom.js";
-import { eventService } from "@/src/js/services/EventService";
+import WordpressTemplate from "~/src/js/modules/WordpressTemplate";
+import { query } from "~/src/js/utils/dom.js";
+import { eventService } from "~/src/js/services/EventService";
 
 export default class Home extends WordpressTemplate {
   constructor() {

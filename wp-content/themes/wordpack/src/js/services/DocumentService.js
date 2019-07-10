@@ -1,5 +1,5 @@
-import { eventService } from "@/src/js/services/EventService";
-import { getDevice, getWindowWidth, isJumbo } from "@/src/js/utils/screen";
+import { eventService } from "~/src/js/services/EventService";
+import { getDevice, getWindowWidth, isJumbo } from "~/src/js/utils/screen";
 
 export default class DocumentService {
   constructor() {

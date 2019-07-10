@@ -1,5 +1,5 @@
-import { query } from "@/src/js/utils/dom";
-import { isEmpty } from "@/src/js/utils/helpers";
+import { query } from "~/src/js/utils/dom";
+import { isEmpty } from "~/src/js/utils/helpers";
 
 class WordpressAdminService {
   constructor() {
