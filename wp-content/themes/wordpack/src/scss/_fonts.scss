@@ -2,32 +2,12 @@
 
 // fonts
 
-$fonts : (
-  // 'font-name' : (
-  //   'bold',
-  //   'light',
-  //   'medium',
-  //   'regular'
-  // )
-);
-
-@each $name, $weights in $fonts {
-  @each $weight in $weights {
-    @font-face {
-    	font-family: str-capicamelize(str-replace($name, '-', ' '));
-    	src: url('../../assets/fonts/#{$name}/#{$name}-#{$weight}.eot');
-    	src: local('☺'), url('../../assets/fonts/#{$name}/#{$name}-#{$weight}.woff') format('woff'), url('../../assets/fonts/#{$name}/#{$name}-#{$weight}.ttf') format('truetype'), url('../../assets/fonts/#{$name}/#{$name}-#{$weight}.svg') format('svg');
-    	font-weight: normal;
-    	font-style: normal;
-    }
-  }
-
-  // TODO : weight classes
-
-  .#{$name} {
-    font-family: str-capicamelize(str-replace($name, '-', ' '));
-  }
-}
+// @font-face {
+//   font-family: "font-name";
+//   src: url("../../assets/fonts/font-name/font-name-weight.woff") format("woff");
+//   font-weight: normal;
+//   font-style: normal;
+// }
 
 //
 
