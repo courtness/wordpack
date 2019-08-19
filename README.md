@@ -38,7 +38,7 @@ yarn install
 The `scripts` in `package.json` describe how to watch/build the theme core:
 
 ```
-yarn watch
+yarn dev
 ```
 
 will start the BS proxy, while:
