@@ -1,10 +1,10 @@
 {
   "name": "wordpack",
   "version": "1.0.0",
-  "description": "Wordpress/Webpack 4 Boilerplate",
+  "description": "Wordpress/ES6/Webpack",
   "main": "index.js",
   "scripts": {
-    "watch": "webpack --watch --config ./webpack.dev.js",
+    "dev": "webpack --watch --config ./webpack.dev.js",
     "stage": "webpack --config ./webpack.staging.js",
     "build": "webpack --config ./webpack.prod.js"
   },

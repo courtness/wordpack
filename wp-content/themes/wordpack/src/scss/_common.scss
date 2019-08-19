@@ -6,6 +6,7 @@
   border: 1px solid red;
 }
 
+.w-full,
 .w-100 {
   width: 100%;
 }
@@ -34,6 +35,7 @@
   width: 100vw;
 }
 
+.h-full,
 .h-100 {
   height: 100%;
 }
@@ -82,31 +84,35 @@
   position: sticky;
 }
 
+.pin-t,
 .top-0 {
   top: 0;
 }
 
+.pin-r,
 .right-0 {
   right: 0;
 }
 
+.pin-b,
 .bottom-0 {
   bottom: 0;
 }
 
+.pin-l,
 .left-0 {
   left: 0;
 }
 
-.block-display {
+.block {
   display: block;
 }
 
-.inline-display {
+.inline-block {
   display: inline-block;
 }
 
-.table-display {
+.table {
   display: table;
 }
 
@@ -291,90 +297,6 @@
 
 ////////////
 
-// transitions
-
-.fadeable {
-  transition: $default-transition opacity;
-
-  pointer-events: none;
-  opacity: 0;
-
-  &.active {
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  &--fast {
-    transition: $fast-transition opacity;
-  }
-
-  &--slow {
-    transition: $slow-transition opacity;
-  }
-}
-
-.fadeable-translator {
-  transition: $default-transition opacity, $default-transition transform;
-
-  transform: translate3d(0, 6px, 0);
-  opacity: 0;
-  pointer-events: none;
-
-  &.active {
-    transform: translate3d(0, 0, 0);
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  &--fast {
-    transition: $fast-transition opacity, $fast-transition transform;
-  }
-
-  &--slow {
-    transition: $slow-transition opacity, $slow-transition transform;
-  }
-
-  &--up {
-    transform: translate3d(0, 6px, 0);
-  }
-
-  &--down {
-    transform: translate3d(0, -6px, 0);
-  }
-
-  &--left {
-    transform: translate3d(6px, 0, 0);
-  }
-
-  &--right {
-    transform: translate3d(-6px, 0, 0);
-  }
-}
-
-.fadeable-scaler {
-  transition: $default-transition opacity, $default-transition transform;
-
-  transform: scale(0);
-  opacity: 0;
-  pointer-events: none;
-
-  &.active {
-    transform: scale(1);
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  &--fast {
-    transition: $fast-transition opacity, $fast-transition transform;
-  }
-
-  &--slow {
-    transition: $slow-transition opacity, $slow-transition transform;
-  }
-}
-
-////////////
-
 // helpers
 
 .no-display {
@@ -401,10 +323,6 @@
   overflow: hidden;
 }
 
-.visible-overflow {
-  overflow: visible;
-}
-
 .no-transition {
   transition: none;
 }
@@ -428,14 +346,6 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-}
-
-.block-display {
-  display: block;
-}
-
-.front {
-  z-index: 999;
 }
 
 .gpu {

@@ -1,3 +1,6 @@
+import "core-js";
+import "whatwg-fetch";
+
 import { themeService } from "~/src/js/services/ThemeService";
 import { wordpressAdminService } from "~/src/js/services/WordpressAdminService";
 import { ieDetector } from "~/src/js/utils/screen";
