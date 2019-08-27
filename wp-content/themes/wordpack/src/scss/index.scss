@@ -1,16 +1,16 @@
-@import 'vendor/reset';
+@import "vendor/reset";
 
-@import 'utils/helpers';
+@import "utils/helpers";
 
-@import '_screen';
-@import '_colors';
-@import '_fonts';
-@import '_transitions';
+@import "_screen";
+@import "_colors";
+@import "_fonts";
+@import "_transitions";
 
-@import '_base';
-@import '_common';
+@import "_base";
+@import "_common";
 
-@import 'components/Header';
-@import 'components/Footer';
+@import "components/Header";
+@import "components/Footer";
 
-@import 'components/Home';
+@import "templates/index-page";

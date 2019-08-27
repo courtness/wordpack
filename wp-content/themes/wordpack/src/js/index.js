@@ -32,7 +32,7 @@ import { ieDetector } from "~/src/js/utils/screen";
       import(/* webpackChunkName: "[request]" */ `./components/${element.getAttribute(`data-component`)}`);
     });
     document.querySelectorAll(`[data-template]`).forEach((element) => {
-      import(/* webpackChunkName: "[request]" */ `./templates/${element.getAttribute(`data-template`)}`);
+      import(/* webpackChunkName: "[request]" */ `./templates/${element.getAttribute(`data-template`)}-page`);
     });
   });
 })(window);

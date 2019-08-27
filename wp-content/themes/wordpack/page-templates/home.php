@@ -9,7 +9,7 @@
   get_header();
 ?>
 
-  <main id="template-root" class="home" data-template="Home">
+  <main id="template-root" class="home" data-template="index">
     <h1>home</h1>
   </main>
 
