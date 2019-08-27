@@ -1,16 +1,35 @@
-import { query } from "~/src/js/utils/dom.js";
+import { addClass, query, removeClass } from "~/src/js/utils/dom.js";
 
-export default class Home {
-  constructor() {
-    this._template = {
-      header : query(`header`)
-    };
+export default class Header {
+  state = {
+    active: false
+  };
 
-    this.initialize();
+  template = {
+    header: query(`.header`),
+    menuButton: query(`.header__menu`)
   }
 
-  initialize = () => {
-    console.log(`Header`);
+  constructor() {
+    this.mount();
+  }
+
+  mount = () => {
+    this.addClickListeners();
+  }
+
+  //
+
+  addClickListeners = () => {
+    this.template.menuButton[0].addEventListener(`click`, () => {
+      this.state.active = !this.state.active;
+
+      if (this.state.active) {
+        addClass(this.template.menuButton, `active`);
+      } else {
+        removeClass(this.template.menuButton, `active`);
+      }
+    });
   }
 }
 

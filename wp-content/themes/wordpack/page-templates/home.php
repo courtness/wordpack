@@ -9,7 +9,7 @@
   get_header();
 ?>
 
-  <main id="template-root" class="home" data-component="Home">
+  <main id="template-root" class="home" data-template="Home">
     <h1>home</h1>
   </main>
 
