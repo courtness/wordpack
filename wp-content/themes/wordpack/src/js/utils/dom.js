@@ -30,21 +30,23 @@ export function getDocumentHeight() {
 //
 // query
 
-export function query(selector) {
-  let collection;
+export function query(selector, context) {
+  context = context || document;
 
-  if (selector.startsWith(`.`)) {
-    collection = document.getElementsByClassName(selector.substring(1));
-  } else if (selector.startsWith(`#`)) {
-    collection = document.getElementById(selector.substring(1));
-  } else if (/^[a-zA-Z].*/.test(selector)) {
-    collection = document.getElementsByTagName(selector);
-  } else {
-    console.warn(`query: Unsupported prefix '${selector.charAt(0)}'`);
-    return [];
+  if (/^(#?[\w-]+|\.[\w-.]+)$/.test(selector)) {
+    switch (selector.charAt(0)) {
+    case `#`:
+      return [context.getElementById(selector.substr(1))];
+    case `.`:
+      return [].slice.call(
+        context.getElementsByClassName(selector.substr(1).replace(/\./g, ` `))
+      );
+    default:
+      return [].slice.call(context.getElementsByTagName(selector));
+    }
   }
 
-  return domParse(collection);
+  return [].slice.call(context.querySelectorAll(selector));
 }
 
 export function queryByAttribute(selector, attributeMap) {

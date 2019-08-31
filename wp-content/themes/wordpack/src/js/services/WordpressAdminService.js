@@ -2,16 +2,14 @@ import { query } from "~/src/js/utils/dom";
 import { isEmpty } from "~/src/js/utils/helpers";
 
 class WordpressAdminService {
-  constructor() {
-    this._wpAdminUrl;
-    this._wpAjaxUrl;
-  }
-
+  wpAdminUrl;
+  wpAjaxUrl;
+  
   initialize = () => {
     let wpUrl = query(`#wp-url`)[0];
 
-    this._wpAdminUrl = wpUrl.getAttribute(`data-adminurl`);
-    this._wpAjaxUrl = wpUrl.getAttribute(`data-ajaxurl`);
+    this.wpAdminUrl = wpUrl.getAttribute(`data-adminurl`);
+    this.wpAjaxUrl = wpUrl.getAttribute(`data-ajaxurl`);
 
     wpUrl.parentNode.removeChild(wpUrl);
   }
@@ -21,7 +19,7 @@ class WordpressAdminService {
 
   postToAjaxAction = (action, data) => {
     return new Promise((resolve, reject) => {
-      let check = this.validateRequestWithData(this._wpAjaxUrl, action, data);
+      let check = this.validateRequestWithData(this.wpAjaxUrl, action, data);
 
       if (!check.valid) {
         reject(check.error);
@@ -38,7 +36,7 @@ class WordpressAdminService {
         method : `POST`
       }
 
-      fetch(this._wpAjaxUrl, request)
+      fetch(this.wpAjaxUrl, request)
         .then(this.fetchHandler)
         .then((response) => response.text())
         .then((body) => {
