@@ -50,53 +50,53 @@ class ImageService {
   //
 
   loadDefaultContent = () => {
-    if (this._defaultLoaded || !this._template.defaultLoadable || !this._template.defaultLoadable.length) {
+    if (this.defaultLoaded || !this.template.defaultLoadable || !this.template.defaultLoadable.length) {
       return;
     }
 
-    this._defaultLoaded = true;
+    this.defaultLoaded = true;
 
-    this.lazyLoad(this._template.defaultLoadable, 100);
+    this.lazyLoad(this.template.defaultLoadable, 100);
   }
 
   loadDeferredCarouselContent = () => {
-    if (this._carouselLoaded || !this._template.carouselLoadable || !this._template.carouselLoadable.length) {
+    if (this.carouselLoaded || !this.template.carouselLoadable || !this.template.carouselLoadable.length) {
       return;
     }
 
-    this._carouselLoaded = true;
+    this.carouselLoaded = true;
 
-    this.lazyLoad(this._template.carouselLoadable, 100);
+    this.lazyLoad(this.template.carouselLoadable, 100);
   }
 
   loadDeferredDesktopContent = () => {
-    if (this._desktopLoaded || !this._template.desktopLoadable || !this._template.desktopLoadable.length) {
+    if (this.desktopLoaded || !this.template.desktopLoadable || !this.template.desktopLoadable.length) {
       return;
     }
 
-    this._desktopLoaded = true;
+    this.desktopLoaded = true;
 
-    this.lazyLoad(this._template.desktopLoadable, 100);
+    this.lazyLoad(this.template.desktopLoadable, 100);
   }
 
   loadDeferredScrollContent = () => {
-    if (this._scrollLoaded || !this._template.scrollLoadable || !this._template.scrollLoadable.length) {
+    if (this.scrollLoaded || !this.template.scrollLoadable || !this.template.scrollLoadable.length) {
       return;
     }
 
-    this._scrollLoaded = true;
+    this.scrollLoaded = true;
 
-    this.lazyLoad(this._template.scrollLoadable, 100);
+    this.lazyLoad(this.template.scrollLoadable, 100);
   }
 
   loadDeferredTouchContent = () => {
-    if (this._touchLoaded || !this._template.touchLoadable || !this._template.touchLoadable.length) {
+    if (this.touchLoaded || !this.template.touchLoadable || !this.template.touchLoadable.length) {
       return;
     }
 
-    this._touchLoaded = true;
+    this.touchLoaded = true;
 
-    this.lazyLoad(this._template.touchLoadable, 100);
+    this.lazyLoad(this.template.touchLoadable, 100);
   }
 
   loadDeviceContent = () => {

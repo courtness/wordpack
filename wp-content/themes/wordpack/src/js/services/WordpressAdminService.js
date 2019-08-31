@@ -1,5 +1,4 @@
 import { query } from "~/src/js/utils/dom";
-import { isEmpty } from "~/src/js/utils/helpers";
 
 class WordpressAdminService {
   wpAdminUrl;
@@ -52,7 +51,7 @@ class WordpressAdminService {
   // helpers
 
   validateRequest = (url, action) => {
-    if (isEmpty(url) || isEmpty(action)) {
+    if (!action || action === `` || !url || url === ``) {
       return {
         valid: false,
         error: `Request data invalid (url: ${url}, action: ${action}`
@@ -63,7 +62,7 @@ class WordpressAdminService {
   }
 
   validateRequestWithData = (url, action, data) => {
-    if (isEmpty(data) || !this.validateRequest(url, action).valid) {
+    if (!data || data === `` || !this.validateRequest(url, action).valid) {
       return {
         valid: false,
         error: `Request data invalid (url: ${url}, action: ${action}, data: ${data}`
