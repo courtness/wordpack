@@ -5,6 +5,8 @@ class EventService extends EventEmitter {
     super();
   }
 
+  //
+
   emitDataByKey = (key, data) => {
     this.emit(key, data);
   }

@@ -6,7 +6,7 @@ class WordpressAdminService {
   wpAjaxUrl;
   
   initialize = () => {
-    let wpUrl = query(`#wp-url`)[0];
+    const wpUrl = query(`#wp-url`)[0];
 
     this.wpAdminUrl = wpUrl.getAttribute(`data-adminurl`);
     this.wpAjaxUrl = wpUrl.getAttribute(`data-ajaxurl`);
@@ -19,22 +19,22 @@ class WordpressAdminService {
 
   postToAjaxAction = (action, data) => {
     return new Promise((resolve, reject) => {
-      let check = this.validateRequestWithData(this.wpAjaxUrl, action, data);
+      const check = this.validateRequestWithData(this.wpAjaxUrl, action, data);
 
       if (!check.valid) {
         reject(check.error);
       }
 
-      let body = `action=${action}&data=${JSON.stringify(data)}`;
+      const body = `action=${action}&data=${JSON.stringify(data)}`;
 
-      let request = {
+      const request = {
         body : body,
         credentials : `same-origin`,
         headers : new Headers({
           "Content-Type": `application/x-www-form-urlencoded; charset=utf-8`
         }),
         method : `POST`
-      }
+      };
 
       fetch(this.wpAjaxUrl, request)
         .then(this.fetchHandler)
@@ -56,10 +56,10 @@ class WordpressAdminService {
       return {
         valid: false,
         error: `Request data invalid (url: ${url}, action: ${action}`
-      }
+      };
     }
 
-    return { valid: true }
+    return { valid: true };
   }
 
   validateRequestWithData = (url, action, data) => {
@@ -67,10 +67,10 @@ class WordpressAdminService {
       return {
         valid: false,
         error: `Request data invalid (url: ${url}, action: ${action}, data: ${data}`
-      }
+      };
     }
 
-    return { valid: true }
+    return { valid: true };
   }
 
   fetchHandler = (response) => {

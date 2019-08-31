@@ -78,16 +78,30 @@ export function queryTagsInParent(parent, tagName) {
   return domParse(parent.getElementsByTagName(tagName));
 }
 
-//
-// class management
+export function findChildrenByClass(parent, className) {
+  let found = [];
 
-export function hasClass(node, className) {
-  if (!node || !node.className) {
-    return false;
+  if (!parent || !parent.children) {
+    return found;
   }
 
-  return node.classList.contains(className);
+  if (className.startsWith(`.`)) {
+    className = className.substring(1);
+  }
+
+  let children = domParse(parent.children);
+
+  children.forEach((child) => {
+    if (hasClass(child, className)) {
+      found.push(child);
+    }
+  });
+
+  return found;
 }
+
+//
+// class management
 
 export function addClass(nodes, className) {
   if (className.startsWith(`.`)) {
@@ -99,6 +113,14 @@ export function addClass(nodes, className) {
       element.classList.add(className);
     }
   });
+}
+
+export function hasClass(node, className) {
+  if (!node || !node.className) {
+    return false;
+  }
+
+  return node.classList.contains(className);
 }
 
 export function removeClass(nodes, className) {
@@ -121,46 +143,6 @@ export function toggleClass(nodes, className) {
   domParse(nodes).forEach((element) => {
     element.classList.toggle(className);
   });
-}
-
-//
-// TODO : combine with addClass
-
-export function addClasses(nodes, classNames) {
-  for (let className of classNames) {
-    addClass(nodes, className);
-  }
-}
-
-//
-// TODO : combine with removeClass
-
-export function removeClasses(nodes, classNames) {
-  for (let className of classNames) {
-    removeClass(nodes, className);
-  }
-}
-
-export function findChildrenByClass(parent, className) {
-  let found = [];
-
-  if (!parent || !parent.children) {
-    return found;
-  }
-
-  if (className.startsWith(`.`)) {
-    className = className.substring(1);
-  }
-
-  let children = domParse(parent.children);
-
-  children.forEach((child) => {
-    if (hasClass(child, className)) {
-      found.push(child);
-    }
-  });
-
-  return found;
 }
 
 //

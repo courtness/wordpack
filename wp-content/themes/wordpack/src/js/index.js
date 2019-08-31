@@ -2,7 +2,6 @@ import "core-js";
 import "whatwg-fetch";
 
 import { imageService } from "~/src/js/services/imageService";
-import { themeService } from "~/src/js/services/ThemeService";
 import { wordpressAdminService } from "~/src/js/services/WordpressAdminService";
 import { ieDetector } from "~/src/js/utils/screen";
 
@@ -11,8 +10,7 @@ import { ieDetector } from "~/src/js/utils/screen";
 
   wordpressAdminService.initialize();
 
-  imageService.load();
-  themeService.initialize();
+  imageService.mount();
 
   const ie = ieDetector();
 

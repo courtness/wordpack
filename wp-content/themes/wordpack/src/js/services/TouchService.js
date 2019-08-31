@@ -1,22 +1,20 @@
 import { eventService } from "~/src/js/services/EventService";
 import { isDesktop, getTouchEvent } from "~/src/js/utils/screen.js";
 
-export default class TouchService {
-  constructor() {
-    this.state = {
-      xDown : false,
-      yDown : false
-    }
+class TouchService {
+  state = {
+    xDown : false,
+    yDown : false
   }
-
+  
   //
 
-  addTouchHandlersForElement = (element) => {
+  addTouchHandlersForElement = element => {
     element.addEventListener(`touchstart`, this.touchStartHandler, false);
     element.addEventListener(`touchmove`, this.touchMoveHandler, false);
   }
 
-  touchStartHandler = (e) => {
+  touchStartHandler = e => {
     if (isDesktop()) {
       return;
     }
@@ -25,7 +23,7 @@ export default class TouchService {
     this.state.yDown = getTouchEvent(e).clientY;
   }
 
-  touchMoveHandler = (e) => {
+  touchMoveHandler = e => {
     if (!this.state.xDown || !this.state.yDown || isDesktop()) {
       return;
     }

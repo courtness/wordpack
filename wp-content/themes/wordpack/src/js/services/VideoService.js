@@ -1,19 +1,15 @@
-import { documentService } from "~/src/js/services/DocumentService"
-import { eventService } from "~/src/js/services/EventService"
-import { getAbsolutePosition } from "~/src/js/utils/screen"
+import { documentService } from "~/src/js/services/DocumentService";
+import { eventService } from "~/src/js/services/EventService";
+import { getAbsolutePosition } from "~/src/js/utils/screen";
 
 class VideoService {
-  constructor() {
-    this._videos = [];
-
-    this.initialize();
+  template = {
+    videos : []
   }
 
-  initialize = () => {
-    //
-  }
+  //
 
-  setPlaybackListeners = (videos) => {
+  setPlaybackListeners = videos => {
     if (!videos || videos.length === 0) {
       return;
     }
@@ -22,29 +18,27 @@ class VideoService {
       videos = [ videos[0] ];
     }
 
-    videos.forEach((video) => {
+    videos.forEach(video => {
       video.onplaying = () => {
         video.playing = true;
-      }
+      };
 
       video.onpause = () => {
         video.playing = false;
-      }
+      };
 
-      this._videos.push(video);
+      this.template.videos.push(video);
     });
   }
 
   addScrollListener = () => {
-    eventService.on(`scroll`, (scrollData) => {
+    eventService.on(`scroll`, scrollData => {
       this.scrollHandler(scrollData);
     });
   }
 
-  //
-
-  scrollHandler = (scrollData) => {
-    this._videos.forEach((video) => {
+  scrollHandler = scrollData => {
+    this.template.videos.forEach(video => {
       const videoOffsetTop = getAbsolutePosition(video).top;
 
       if (scrollData.scrollTop > (videoOffsetTop - documentService.state.windowHeight) &&

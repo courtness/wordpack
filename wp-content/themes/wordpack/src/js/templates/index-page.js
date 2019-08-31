@@ -17,6 +17,8 @@ export default class Home extends WordpressTemplate {
   }
 
   mount = () => {
+    this.state.active = true;
+
     console.log(`Mounted`);
   }
 }

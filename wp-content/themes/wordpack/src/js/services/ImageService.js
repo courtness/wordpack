@@ -4,25 +4,24 @@ import { isIterable } from "~/src/js/utils/dom";
 import { isDesktop } from "~/src/js/utils/screen";
 
 class ImageService {
-  constructor() {
-    this._preloadedImages = [];
-
-    this._template = {
-      defaultLoadable : query(`.img-defer`),
-      carouselLoadable : query(`.img-defer--carousel`),
-      desktopLoadable : query(`.img-defer--desktop`),
-      scrollLoadable : query(`.img-defer--scroll`),
-      touchLoadable : query(`.img-defer--touch`)
-    }
-
-    this._carouselLoaded = false;
-    this._defaultLoaded = false;
-    this._desktopLoaded = false;
-    this._scrollLoaded = false;
-    this._touchLoaded = false;
+  state = {
+    preloadedImages : [],
+    carouselLoaded : false,
+    defaultLoaded : false,
+    desktopLoaded : false,
+    scrollLoaded : false,
+    touchLoaded : false
   }
 
-  load = () => {
+  template = {
+    defaultLoadable : query(`.img-defer`),
+    carouselLoadable : query(`.img-defer--carousel`),
+    desktopLoadable : query(`.img-defer--desktop`),
+    scrollLoadable : query(`.img-defer--scroll`),
+    touchLoadable : query(`.img-defer--touch`)
+  }
+
+  mount = () => {
     this.addScrollListener();
     this.loadDefaultContent();
     this.loadDeviceContent();
@@ -31,6 +30,8 @@ class ImageService {
       this.loadDeferredScrollContent();
     }, 1000);
   }
+
+  //
 
   addResizeListener = () => {
     eventService.on(`device`, () => {
@@ -107,7 +108,6 @@ class ImageService {
   }
 
   //
-
 
   lazyLoad = (imageElements, timeout) => {
     if (!imageElements) {

@@ -2,6 +2,36 @@
 const mobileWidth = 768;
 const tabletWidth = 1024;
 
+export function getDevice() {
+  if (isDesktop()) {
+    return `desktop`;
+  } else if (isTablet()) {
+    return `tablet`;
+  }
+
+  return `mobile`;
+}
+
+export function isJumbo() {
+  return getWindowWidth() > 1440;
+}
+
+export function isDesktop() {
+  return window.matchMedia(`(min-width: ${tabletWidth + 1}px)`).matches;
+}
+
+export function isTablet() {
+  return window.matchMedia(`(min-width: ${mobileWidth}px) and (max-width: ${tabletWidth}px)`).matches;
+}
+
+export function isMobile() {
+  return window.matchMedia(`(max-width: ${mobileWidth - 1}px)`).matches;
+}
+
+export function isMobileSafari() {
+  return isMobile() && /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream && !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
+}
+
 export function ieDetector() {
   const ua = window.navigator.userAgent;
 
@@ -24,13 +54,15 @@ export function ieDetector() {
   return false;
 }
 
+//
+
 export function getAbsolutePosition(el) {
   let found,
-      left = 0,
-      top = 0,
-      width = 0,
-      height = 0,
-      offsetBase = getAbsolutePosition.offsetBase;
+    left = 0,
+    top = 0,
+    width = 0,
+    height = 0,
+    offsetBase = getAbsolutePosition.offsetBase;
 
   if (!offsetBase && document.body) {
     offsetBase = getAbsolutePosition.offsetBase = document.createElement(`div`);
@@ -61,24 +93,6 @@ export function getAbsolutePosition(el) {
   };
 }
 
-export function getDevice() {
-  if (isDesktop()) {
-    return `desktop`;
-  } else if (isTablet()) {
-    return `tablet`;
-  } else {
-    return `mobile`;
-  }
-}
-
-export function isJumbo() {
-  return getWindowWidth() > 1440;
-}
-
-export function getTouchEvent(e) {
-  return e.changedTouches ? e.changedTouches[0] : e;
-}
-
 export function getDocumentHeight() {
   return Math.max(
     document.body.scrollHeight,
@@ -89,12 +103,8 @@ export function getDocumentHeight() {
   );
 }
 
-export function getWindowHeight() {
-  return window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-}
-
-export function getWindowWidth() {
-  return window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+export function getTouchEvent(e) {
+  return e.changedTouches ? e.changedTouches[0] : e;
 }
 
 export function inViewport(element, scrollTop) {
@@ -104,34 +114,10 @@ export function inViewport(element, scrollTop) {
   );
 }
 
-export function getPosition(element) {
-  let xPosition = 0;
-  let yPosition = 0;
-
-  while (element) {
-    xPosition += (element.offsetLeft - element.scrollLeft + element.clientLeft);
-    yPosition += element.offsetTop;
-    element = element.offsetParent;
-  }
-
-	return {
-    x: xPosition,
-    y: yPosition
-  };
-};
-
-export function isDesktop() {
-  return window.matchMedia(`(min-width: ${tabletWidth + 1}px)`).matches;
+export function getWindowHeight() {
+  return window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 }
 
-export function isMobile() {
-  return window.matchMedia(`(max-width: ${mobileWidth - 1}px)`).matches;
-}
-
-export function isMobileSafari() {
-  return isMobile() && /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream && !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
-}
-
-export function isTablet() {
-  return window.matchMedia(`(min-width: ${mobileWidth}px) and (max-width: ${tabletWidth}px)`).matches;
+export function getWindowWidth() {
+  return window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 }

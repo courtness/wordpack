@@ -1,6 +1,6 @@
 import { addClass, query, removeClass } from "~/src/js/utils/dom.js";
 
-export default class Header {
+class Header {
   state = {
     active: false
   };
@@ -15,6 +15,8 @@ export default class Header {
   }
 
   mount = () => {
+    this.state.active = true;
+
     this.addClickListeners();
   }
 

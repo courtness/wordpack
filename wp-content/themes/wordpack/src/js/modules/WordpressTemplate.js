@@ -2,10 +2,10 @@ import { documentService } from "~/src/js/services/DocumentService";
 
 export default class WordpressTemplate {
   constructor() {
-    this.initialize();
+    this.mount();
   }
 
-  initialize = () => {
+  mount = () => {
     documentService.addDocumentScrollListener();
     documentService.addWindowResizeListener();
   }
