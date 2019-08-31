@@ -2,20 +2,17 @@ import { eventService } from "~/src/js/services/EventService";
 import { getDevice, getWindowWidth, isJumbo } from "~/src/js/utils/screen";
 
 export default class DocumentService {
-  constructor() {
+  state = {
+    device: getDevice(),
+    jumbo : false,
+    scrolling: false,
+    scrollingDown: false,
+    scrollTop: 0,
+    windowWidth: document.documentElement.clientWidth,
+    windowHeight: document.documentElement.clientHeight
+  };
 
-    this.state = {
-      device: getDevice(),
-      jumbo : false,
-      scrolling: false,
-      scrollingDown: false,
-      scrollTop: 0,
-      windowWidth: document.documentElement.clientWidth,
-      windowHeight: document.documentElement.clientHeight
-    };
-
-    this._scrollTimeout = {};
-  }
+  scrollTimeout = {};
 
   //
 
@@ -54,8 +51,8 @@ export default class DocumentService {
     document.addEventListener(`scroll`, this.documentScrollHandler, false);
   }
 
-  documentScrollHandler = (e) => {
-    clearTimeout(this._scrollTimeout);
+  documentScrollHandler = () => {
+    clearTimeout(this.scrollTimeout);
 
     this.state.scrolling = true;
     this.state.scrollingDown = this.state.scrollTop < document.documentElement.scrollTop;
@@ -67,7 +64,7 @@ export default class DocumentService {
       scrollingDown: this.state.scrollingDown
     });
 
-    this._scrollTimeout = setTimeout(() => {
+    this.scrollTimeout = setTimeout(() => {
       this.state.scrolling = false;
       eventService.emitDataByKey(`scrollend`, this.state.scrollTop);
     }, 100);
