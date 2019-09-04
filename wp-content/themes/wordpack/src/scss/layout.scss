@@ -130,7 +130,7 @@ $grid_padding: (
   }
 
   @for $i from 1 through $columns {
-    .grid__columns--#{$breakpoint_suffix}#{$i} {
+    .grid-end--#{$breakpoint_suffix}#{$i} {
       @supports (display: grid) {
         width: 100%;
         grid-column-end: span $i;
@@ -139,7 +139,7 @@ $grid_padding: (
       width: calc(100% / 12 * #{$i});
     }
 
-    .grid__start--#{$breakpoint_suffix}#{$i} {
+    .grid-start--#{$breakpoint_suffix}#{$i} {
       @supports (display: grid) {
         margin: 0 auto;
         grid-column-start: $i;
@@ -182,7 +182,7 @@ $grid_padding: (
   @include generate-classes($grid_columns, "xs");
 }
 
-@function grid-column-width($count) {
+@function grid-columns($count) {
   $column-width: 100vw;
 
   @if screen and (min-width: map-get($breakpoints, "xl")) {

@@ -2,13 +2,13 @@
 
 @import "utils/helpers";
 
-@import "_screen";
-@import "_colors";
-@import "_fonts";
-@import "_transitions";
+@import "layout";
+@import "colors";
+@import "fonts";
+@import "transitions";
 
-@import "_base";
-@import "_common";
+@import "base";
+@import "common";
 
 @import "components/Header";
 @import "components/Footer";
