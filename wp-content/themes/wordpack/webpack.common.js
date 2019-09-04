@@ -12,7 +12,7 @@ module.exports = {
   },
 
   output: {
-    path: path.resolve(__dirname, `dist`),
+    path: path.resolve(__dirname, `dist`)
   },
 
   plugins: [
@@ -56,7 +56,7 @@ module.exports = {
           chunks: `all`
         },
         styles: {
-          name: 'styles',
+          name: `styles`,
           test: /\.css$/,
           chunks: `all`,
           enforce: true

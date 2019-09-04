@@ -58,8 +58,8 @@ module.exports = merge(common, {
             }
           }
         },
-        `sass-loader`,
-      ],
+        `sass-loader`
+      ]
     }]
   }
 });

@@ -151,7 +151,7 @@ $grid_padding: (
 }
 
 .no-margin--legacy {
-  @include internet-explorer {
+  @include ms-all {
     margin-left: 0 !important;
   }
 
@@ -182,7 +182,7 @@ $grid_padding: (
   @include generate-classes($grid_columns, "xs");
 }
 
-@function grid-columns($count) {
+@function grid-end($count) {
   $column-width: 100vw;
 
   @if screen and (min-width: map-get($breakpoints, "xl")) {
