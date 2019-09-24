@@ -1,16 +1,14 @@
-@import "../../node_modules/tailwindcss/base.css";
-@import "../../node_modules/tailwindcss/components.css";
-@import "../../node_modules/tailwindcss/utilities.css";
+@import "vendor/tailwind.css";
 
 @import "utils/helpers";
 
-@import "layout";
+@import "common";
 @import "colors";
 @import "fonts";
+@import "layout";
 @import "transitions";
 
 @import "base";
-@import "common";
 
 @import "components/Header";
 @import "components/Footer";

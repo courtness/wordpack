@@ -118,3 +118,21 @@ function seoify($string) {
 
   return $string;
 }
+
+
+function get_post_author( $post_id ) {
+  $author = '';
+
+  if ( !isset( $post_id ) ) {
+    return $author;
+  }
+
+  if ( !empty( get_field( 'author', $post_id ) ) ):
+    $author = get_field( 'author', $post_id );
+  else:
+    $author_id = get_post_field( 'post_author', $post_id );
+    $author = get_the_author_meta( 'display_name' , $author_id ); 
+  endif;
+
+  return $author;
+}
