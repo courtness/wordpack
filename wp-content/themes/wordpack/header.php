@@ -24,7 +24,7 @@
       <?php include( locate_template( 'dist/php/css.php' ) ); ?>
     <?php endif; ?>
 
-    <?php include( locate_template( 'partials/scripts/header.php' ) ); ?>
+    <?php include( locate_template( 'partials/scripts/head.php' ) ); ?>
 
     <?php wp_head(); ?>
   </head>
