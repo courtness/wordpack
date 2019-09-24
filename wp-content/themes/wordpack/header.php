@@ -20,6 +20,10 @@
 
     <title><?php wp_title( '' ); ?></title>
 
+    <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+
     <?php if ( ENVIRONMENT == 'production' ): ?>
       <?php include( locate_template( 'dist/php/css.php' ) ); ?>
     <?php endif; ?>
